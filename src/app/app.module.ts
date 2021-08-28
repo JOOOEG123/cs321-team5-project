@@ -9,11 +9,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AllLayoutComponents } from './layout';
+import { PagesComponent } from './pages';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ...AllLayoutComponents,
+    ...PagesComponent
   ],
   imports: [
     AngularFireAuthModule,
