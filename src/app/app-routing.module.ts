@@ -1,17 +1,24 @@
-import { HomepageComponent } from './pages/homepage/homepage.component';
 import { NgModule } from '@angular/core';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { PagesRoutes } from './pages';
+import { HomepageNoAuthComponent } from './pages/homepageNoAuth/homepageNoAuth.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'hp',
     component: LayoutComponent,
     children: [
       {
         path: 'Homepage',
-        component: HomepageComponent,
+        component: HomepageNoAuthComponent,
+        data: { Title: 'Homepage' },
+      },
+      ...PagesRoutes,
+      {
+        path: '',
+        pathMatch: 'full',
+        component: HomepageNoAuthComponent,
         data: { Title: 'Homepage' },
       },
     ],
@@ -19,7 +26,7 @@ const routes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'loggedIn',
+    redirectTo: 'hp/Homepage',
   },
 ];
 

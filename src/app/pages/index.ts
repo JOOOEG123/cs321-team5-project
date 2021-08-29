@@ -11,4 +11,13 @@ export const PagesComponent = [
   SignUpComponent,
 ];
 
-export const PagesRoutes: Routes = [];
+export const PagesRoutes: Routes = [
+  {
+    path: 'SignUp',
+    component: SignUpComponent
+  },
+  {
+    path: 'SignIn',
+    component: SignInComponent
+  },
+];
