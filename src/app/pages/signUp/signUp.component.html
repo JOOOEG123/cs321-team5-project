@@ -9,74 +9,60 @@
             <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body p-4 p-sm-5">
-            <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
-            <form>
-              <div class="form-floating mb-3">
+            <h5 class="card-title text-center mb-5 fW fs-5">Register</h5>
+            <form [formGroup]="signUpForm" (ngSubmit)="register()">
+              <div
+                class="form-floating mb-3"
+                *ngFor="let formControl of formConst"
+              >
                 <input
-                  type="text"
+                  *ngIf="!formControl.type || formControl.type != 'datalist'"
+                  [type]="formControl.type || 'text'"
                   class="form-control"
-                  id="firstNameInput"
-                  placeholder="Firstname"
-                  required
-                  autofocus
+                  [id]="formControl.formControl + '-regist'"
+                  [formControlName]="formControl.formControl"
+                  [placeholder]="formControl.placeholder"
+                  [ngClass]="{
+                    'is-invalid':
+                      signUpForm.controls[formControl.formControl].invalid &&
+                      signUpForm.controls[formControl.formControl].touched
+                  }"
+                  [attr.aria-describedby]="formControl.formControl + '-error'"
                 />
-                <label for="firstNameInput">FirstName</label>
-              </div>
-
-              <div class="form-floating mb-3">
                 <input
-                  type="text"
+                  *ngIf="formControl.type === 'datalist'"
+                  list="countries-list"
                   class="form-control"
-                  id="lastnameInput"
-                  placeholder="LastName"
-                  required
-                  autofocus
+                  [id]="formControl.formControl + '-regist'"
+                  [formControlName]="formControl.formControl"
+                  [placeholder]="formControl.placeholder"
+                  [ngClass]="{
+                    'is-invalid':
+                      signUpForm.controls[formControl.formControl].invalid &&
+                      signUpForm.controls[formControl.formControl].touched
+                  }"
+                  [attr.aria-describedby]="formControl.formControl + '-error'"
                 />
-                <label for="lastnameInput">LastName</label>
-              </div>
+                <label [for]="formControl.formControl + '-regist'">
+                  {{ formControl.placeholder }}
+                </label>
 
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInputUsername"
-                  placeholder="myusername"
-                  required
-                  autofocus
-                />
-                <label for="floatingInputUsername">Username</label>
-              </div>
+                <datalist
+                  id="countries-list"
+                  *ngIf="formControl.formControl === 'country'"
+                >
+                  <option
+                    [value]="option.name"
+                    *ngFor="let option of listOfCountries"
+                  ></option>
+                </datalist>
 
-              <div class="form-floating mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="floatingInputEmail"
-                  placeholder="name@example.com"
-                />
-                <label for="floatingInputEmail">Email address</label>
-              </div>
-
-              <hr />
-
-              <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
-                />
-                <label for="floatingPassword">Password</label>
-              </div>
-
-              <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  id="floatingPasswordConfirm"
-                  placeholder="Confirm Password"
-                />
-                <label for="floatingPasswordConfirm">Confirm Password</label>
+                <small
+                  [id]="formControl.formControl + '-error'"
+                  class="invalid-feedback"
+                >
+                  {{ formControl.placeholder }} is required
+                </small>
               </div>
 
               <div class="d-grid mb-2">
@@ -86,39 +72,16 @@
                     fw-bold
                     text-uppercase
                   "
+                  [disabled]="signUpForm.invalid"
                   type="submit"
                 >
                   Register
                 </button>
               </div>
-
               <a class="d-block text-center mt-2 small" href="#"
                 >Have an account? Sign In</a
               >
-
               <hr class="my-4" />
-
-              <div class="d-grid mb-2">
-                <button
-                  class="btn btn-lg btn-google btn-login fw-bold text-uppercase"
-                  type="submit"
-                >
-                  <i class="fab fa-google me-2"></i> Sign up with Google
-                </button>
-              </div>
-
-              <div class="d-grid">
-                <button
-                  class="
-                    btn btn-lg btn-facebook btn-login
-                    fw-bold
-                    text-uppercase
-                  "
-                  type="submit"
-                >
-                  <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
-                </button>
-              </div>
             </form>
           </div>
         </div>
