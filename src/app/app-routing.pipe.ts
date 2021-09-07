@@ -29,11 +29,11 @@ export const redirectLoggedInToByRoutes = () =>
         return true;
       }
       // if a custom claim is set, then redirect to ['users'].
-      if (claims.admin) {
-        return ['loggedIn', 'view-users'];
-      }
+      // if (claims.admin) {
+      //   return ['loggedIn', 'view-users'];
+      // }
       // otherwise, redirecr user's profile page
-      return ['loggedIn', 'profile', claims.user_id];
+      return ['hp', 'profile', claims.user_id];
     })
   );
 

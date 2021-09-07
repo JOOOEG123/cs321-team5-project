@@ -5,6 +5,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '@core/services/auth/auth.service';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 
 @Component({
@@ -35,28 +36,32 @@ export class SignUpComponent implements OnInit {
     {
       formControl: 'password',
       placeholder: 'Password',
-      type: 'password'
+      type: 'password',
     },
     {
       formControl: 'confirmPassword',
       placeholder: 'Confirm Password',
-      type: 'password'
+      type: 'password',
     },
     {
       formControl: 'dob',
       placeholder: 'Date of Birth',
-      type: 'date'
+      type: 'date',
     },
     {
       formControl: 'country',
       placeholder: 'Country',
-      type: 'datalist'
+      type: 'datalist',
     },
   ];
 
-  listOfCountries:any;
-  constructor(private fb: FormBuilder, private dataserv: DataStorageService) {
-    this.dataserv.getCountry().then(x =>this.listOfCountries = x)
+  listOfCountries: any;
+  constructor(
+    private auth: AuthService,
+    private fb: FormBuilder,
+    private dataserv: DataStorageService
+  ) {
+    this.dataserv.getCountry().then((x) => (this.listOfCountries = x));
   }
 
   ngOnInit() {}
@@ -85,6 +90,6 @@ export class SignUpComponent implements OnInit {
   }
 
   register() {
-
+    this.auth.signInOrSignOut(this.signUpForm.value, false);
   }
 }
