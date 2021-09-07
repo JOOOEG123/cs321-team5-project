@@ -49,7 +49,6 @@ export class AuthService {
           uid: userd.uid,
         });
       }
-      console.log(indexedDB.open('fbase_key', 1));
       this.routeOnLogin();
     } catch (err) {}
   }
