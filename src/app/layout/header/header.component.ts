@@ -5,24 +5,21 @@ import { AuthService } from '@core/services/auth/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  isLogIn:boolean = this.auth.user != null;
-  constructor(private auth: AuthService, private authfire: AngularFireAuth) { }
+  isLogIn = false;
+  constructor(private auth: AuthService, private authfire: AngularFireAuth) {}
 
-  async ngOnInit() {
-    this.authfire.authState.subscribe(x => console.log(x));
-    // console.log(j)
-
-
-    // this.isLogIn = await this.auth.authState.toPromise();
-
-    this.auth.authState.subscribe(x=> this.isLogIn = x);
+  ngOnInit() {
+    this.authfire.authState.subscribe((x) => (this.isLogIn = x != null));
   }
 
   signOut() {
     this.auth.signOut();
   }
 
+  getAuthState() {
+    return this.authfire.authState.toPromise();
+  }
 }

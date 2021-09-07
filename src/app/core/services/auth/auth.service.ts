@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthUser } from '@core/models/auth/auth.model';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,21 +11,13 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class AuthService {
   private _authState = new BehaviorSubject<boolean>(false);
   readonly authState = this._authState.asObservable();
-  user:any;
+  user: any;
 
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
     private dataStorage: DataStorageService
-  ) {
-    this.auth.currentUser.then(x=>{
-      if(x) {
-        this.user = x;
-        this._authState.next(true);
-      }
-    });
-
-  }
+  ) {}
 
   async signInOrSignOut(user: AuthUser, isSignIn: boolean) {
     try {
@@ -57,14 +49,14 @@ export class AuthService {
           uid: userd.uid,
         });
       }
-
+      console.log(indexedDB.open('fbase_key', 1));
       this.routeOnLogin();
     } catch (err) {}
   }
 
   signOut() {
     this.auth.signOut();
-    this.router.navigate(['hp', 'SignIn']);
+    this.router.navigate(['hp', 'Homepage']);
     console.log('signOut');
     this._authState.next(false);
   }
@@ -77,7 +69,7 @@ export class AuthService {
     const user = await this.auth.currentUser;
     const token = await user?.getIdTokenResult();
     if (token) {
-      this._authState.next(true)
+      this._authState.next(true);
       this.router.navigate(['hp', 'profile', user?.uid]);
     }
   }
