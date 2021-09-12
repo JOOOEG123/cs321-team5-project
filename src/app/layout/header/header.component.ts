@@ -12,8 +12,10 @@ export class HeaderComponent implements OnInit {
   constructor(private auth: AuthService, private authfire: AngularFireAuth) {}
 
   async ngOnInit() {
-    this.authfire.authState.subscribe((x) => (this.isLogIn = x != null));
-    this.uid = (await this.authfire.currentUser)?.uid;
+    this.authfire.authState.subscribe((x) => {
+      this.isLogIn = x != null;
+      this.uid = x?.uid
+    });
   }
 
   signOut() {
