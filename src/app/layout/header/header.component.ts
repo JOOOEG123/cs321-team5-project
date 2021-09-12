@@ -8,10 +8,10 @@ import { AuthService } from '@core/services/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isLogIn = false;
-  uid: any;
+  uid: string | undefined;
   constructor(private auth: AuthService, private authfire: AngularFireAuth) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.authfire.authState.subscribe((x) => {
       this.isLogIn = x != null;
       this.uid = x?.uid
