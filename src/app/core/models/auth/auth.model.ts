@@ -17,6 +17,9 @@ export interface UserProfile {
   firstName: string| undefined;
   lastName: string| undefined;
   uid: string| null;
+  createdt?: string | null;
+  moddt?: string | null;
+
 }
 
 

@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllLayoutComponents } from './layout';
 import { PagesComponent } from './pages';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PagesComponent } from './pages';
     AngularFirestoreModule,
     AppRoutingModule,
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

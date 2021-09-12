@@ -12,6 +12,7 @@ export const PagesComponent = [
   HomepageComponent,
   SignInComponent,
   SignUpComponent,
+  UserProfileComponent
 ];
 
 export const PagesRoutes: Routes = [

@@ -45,6 +45,16 @@
           <a class="nav-link" href="#">About Us</a>
         </li>
         <li><a class="nav-link btn" (click)="signOut()" *ngIf="isLogIn">SignOut</a></li>
+        <li>
+          <a class="navbar-link" [routerLink]="['profile',  uid]" *ngIf="isLogIn">
+            <img
+              src="assets/icons/profile/user.svg"
+              alt="logo"
+              class="rounded-circle border shadow"
+              width="40"
+            />
+          </a>
+        </li>
         <li class="nav-item dropdown" *ngIf="!isLogIn">
           <a
             class="nav-link dropdown-toggle"
