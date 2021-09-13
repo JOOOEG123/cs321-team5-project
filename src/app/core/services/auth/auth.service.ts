@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthUser } from '@core/models/auth/auth.model';
-import { first } from 'rxjs/operators';
+import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: AngularFireAuth, private router: Router) {}
+  private _authState = new BehaviorSubject<boolean>(false);
+  readonly authState = this._authState.asObservable();
+  user: any;
 
-  isLoggedIn() {
-    return this.auth.authState.pipe(first()).toPromise();
-  }
+  constructor(
+    private auth: AngularFireAuth,
+    private router: Router,
+    private dataStorage: DataStorageService
+  ) {}
 
   async signInOrSignOut(user: AuthUser, isSignIn: boolean) {
     try {
@@ -29,20 +34,42 @@ export class AuthService {
           displayName: `${firstName} ${lastName}`,
         });
 
-        const user = await this.auth.currentUser;
-        if (!user) {
+        const userd = await this.auth.currentUser;
+        if (!userd) {
           return;
         }
-      }
 
-      if (!(await this.isLoggedIn())) {
-        return;
+        this.dataStorage.setNewProfile({
+          country: user.country,
+          userName: user.userName,
+          dob: user.dob,
+          email: user.email,
+          firstName,
+          lastName,
+          uid: userd.uid,
+        });
       }
+      this.routeOnLogin();
     } catch (err) {}
   }
 
   signOut() {
     this.auth.signOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['hp', 'Homepage']);
+    console.log('signOut');
+    this._authState.next(false);
+  }
+
+  async getAuthState() {
+    return await this.authState.toPromise();
+  }
+
+  async routeOnLogin() {
+    const user = await this.auth.currentUser;
+    const token = await user?.getIdTokenResult();
+    if (token) {
+      this._authState.next(true);
+      this.router.navigate(['hp', 'profile', user?.uid]);
+    }
   }
 }

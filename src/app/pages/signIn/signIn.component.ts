@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '@core/services/auth/auth.service';
+import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 
 @Component({
   selector: 'app-signIn',
@@ -6,10 +9,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signIn.component.scss']
 })
 export class SignInComponent implements OnInit {
+  signInForm = this.createForm();
 
-  constructor() { }
+  formConst = [
+    {
+      formControl: 'email',
+      placeholder: 'Email address',
+    },
+    {
+      formControl: 'password',
+      placeholder: 'Password',
+      type: 'password'
+    }
+  ];
 
-  ngOnInit() {
+  listOfCountries:any;
+  constructor(private fb: FormBuilder, private auth: AuthService) {
   }
 
+  ngOnInit() {}
+
+  createForm() {
+    return this.fb.group(
+      {
+
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+      }
+    );
+  }
+
+  signIn() {
+    this.auth.signInOrSignOut(this.signInForm.value, true);
+  }
 }
