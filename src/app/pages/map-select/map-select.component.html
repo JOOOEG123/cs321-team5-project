@@ -1,0 +1,20 @@
+<body>
+  <!-- header -->
+
+  <!-- map box -->
+  <div class='map-container' *ngFor='let map of maps'>
+    <img class='map-img' src='{{map.imageUrl}}'>
+    <div class='map-overlay'>
+      <div class='map-spacer'>
+        <p class='map-title'>
+          {{map.name}}
+        </p>
+        <p class='map-subtitle'>
+          {{map.description}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
