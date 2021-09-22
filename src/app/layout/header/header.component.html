@@ -39,9 +39,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
+          <!-- Changed the routerLink path because it was displaying as /hp/hp/Homepage, now it is /hp/Homepage. -->
+          <!-- Change by Renato Scudere. -->
           <a class="nav-link active" aria-current="page" [routerLink]="['Homepage']">Home</a>
         </li>
         <li class="nav-item">
+          <!-- Added the router link for the about us page. -->
+          <!-- Change by Renato Scudere. -->
           <a class="nav-link" [routerLink]="['AboutUs']">About Us</a>
         </li>
         <li><a class="nav-link btn" (click)="signOut()" *ngIf="isLogIn">SignOut</a></li>
@@ -71,6 +75,8 @@
             aria-labelledby="navbarDropdown"
           >
             <li>
+              <!-- Changed the text for sign in and sign up. They no longer appear as SignIn/SignUp, now they are Sign In/Sign Up -->
+              <!-- Change made by Renato Scudere. -->
               <a class="dropdown-item" [routerLink]="['SignIn']">Sign In</a>
             </li>
             <li>
