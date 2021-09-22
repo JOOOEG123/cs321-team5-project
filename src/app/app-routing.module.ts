@@ -13,14 +13,14 @@ const routes: Routes = [
       {
         path: 'Homepage',
         component: HomepageNoAuthComponent,
-        data: { Title: 'Homepage' },
+        data: { title: 'Homepage' },
       },
       ...PagesRoutes,
       {
         path: '',
         pathMatch: 'full',
         component: HomepageNoAuthComponent,
-        data: { Title: 'Homepage' },
+        data: { title: 'Homepage' },
       },
     ],
   },

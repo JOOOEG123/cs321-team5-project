@@ -10,14 +10,16 @@ export interface AuthUser {
 
 
 export interface UserProfile {
-  country: string;
-  userName: string;
-  dob: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  uid: string;
+  country: string | null;
+  userName: string | undefined;
+  dob: string | null;
+  email: string| null;
+  firstName: string| undefined;
+  lastName: string| undefined;
+  uid: string| null;
+  createdt?: string | null;
+  moddt?: string | null;
+
 }
 
 

@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllLayoutComponents } from './layout';
 import { PagesComponent } from './pages';
 import { MapSelectComponent } from './pages/map-select/map-select.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MapSelectComponent } from './pages/map-select/map-select.component';
     AngularFirestoreModule,
     AppRoutingModule,
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
