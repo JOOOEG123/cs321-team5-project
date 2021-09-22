@@ -39,10 +39,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="['hp', 'Homepage']">Home</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="['Homepage']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" [routerLink]="['AboutUs']">About Us</a>
         </li>
         <li><a class="nav-link btn" (click)="signOut()" *ngIf="isLogIn">SignOut</a></li>
         <li>
@@ -64,20 +64,20 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            SignIn/SignUp
+            Sign In/Sign Up
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdown"
           >
             <li>
-              <a class="dropdown-item" [routerLink]="['SignIn']">SignIn</a>
+              <a class="dropdown-item" [routerLink]="['SignIn']">Sign In</a>
             </li>
             <li>
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['SignUp']">SignUp</a>
+              <a class="dropdown-item" [routerLink]="['SignUp']">Sign Up</a>
             </li>
           </ul>
         </li>

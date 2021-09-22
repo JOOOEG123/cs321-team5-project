@@ -13,12 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllLayoutComponents } from './layout';
 import { PagesComponent } from './pages';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ...AllLayoutComponents,
-    ...PagesComponent
+    ...PagesComponent,
   ],
   imports: [
     AngularFireAuthModule,
