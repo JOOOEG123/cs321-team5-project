@@ -2,7 +2,7 @@
   <!-- header -->
 
   <!-- map box -->
-  <div class='map-container' *ngFor='let map of maps'>
+  <div class='map-container' (click)='clicked(map)' *ngFor='let map of maps'>
     <img class='map-img' src='{{map.imageUrl}}'>
     <div class='map-overlay'>
       <div class='map-spacer'>
@@ -11,6 +11,20 @@
         </p>
         <p class='map-subtitle'>
           {{map.description}}
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class='map-container' (click)='newMap()'>
+    <div class='map-overlay'>
+      <div class='map-spacer'>
+        <p class='map-title'>
+          Add New Map
+        </p>
+        <p class='map-subtitle'>
+          Click here
         </p>
       </div>
     </div>

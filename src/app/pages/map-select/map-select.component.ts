@@ -24,4 +24,12 @@ export class MapSelectComponent implements OnInit {
     this.maps.push(map)
   }
 
+  clicked(map: DndMap) {
+    console.log(map);
+  }
+
+  newMap() {
+    console.log('new map clicked');
+  }
+
 }
