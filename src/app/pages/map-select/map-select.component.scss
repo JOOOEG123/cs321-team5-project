@@ -1,0 +1,35 @@
+.map-container{
+  height: 200px;
+  width: 200px;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.6);
+  margin: 50px;
+  transition-duration: 0.3s;
+    transition-property: transform;
+  display: inline-flex;
+}
+
+.map-container:hover,
+.map-container:active,
+.map-container:focus{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.map-img{
+  position: absolute; top: 0; width: 100%; height: 100%; border-radius: 10px;
+}
+
+.map-overlay{
+  height: 200px; width: 200px; background: linear-gradient(0deg, #000000cc 30%, #ffffff44 100%); color: white; text-align: center; position: relative; border-radius: 10px;
+}
+.map-title{
+  font-size: 24px;
+}
+.map-subtitle{
+  font-size: 16px;
+}
+.map-spacer {
+  padding-top: 120px;
+}

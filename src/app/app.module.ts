@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllLayoutComponents } from './layout';
 import { PagesComponent } from './pages';
+import { MapSelectComponent } from './pages/map-select/map-select.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     AppComponent,
     ...AllLayoutComponents,
     ...PagesComponent,
+    MapSelectComponent
   ],
   imports: [
     AngularFireAuthModule,
