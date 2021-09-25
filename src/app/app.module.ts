@@ -14,6 +14,8 @@ import { AllLayoutComponents } from './layout';
 import { PagesComponent } from './pages';
 import { MapSelectComponent } from './pages/map-select/map-select.component';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [

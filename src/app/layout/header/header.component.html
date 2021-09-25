@@ -27,7 +27,6 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <!-- <span class="navbar-toggler-icon">=</span> -->
       <img
         src="assets/icons/homepage/menu.svg"
         alt="menu"
@@ -39,14 +38,27 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" [routerLink]="['hp', 'Homepage']">Home</a>
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['Homepage']"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" [routerLink]="['AboutUs']">About Us</a>
         </li>
-        <li><a class="nav-link btn" (click)="signOut()" *ngIf="isLogIn">SignOut</a></li>
         <li>
-          <a class="navbar-link" [routerLink]="['profile',  uid]" *ngIf="isLogIn">
+          <a class="nav-link btn" (click)="signOut()" *ngIf="isLogIn"
+            >SignOut</a
+          >
+        </li>
+        <li>
+          <a
+            class="navbar-link"
+            [routerLink]="['profile', uid]"
+            *ngIf="isLogIn"
+          >
             <img
               src="assets/icons/profile/user.svg"
               alt="logo"
@@ -64,20 +76,22 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            SignIn/SignUp
+            Sign In/Sign Up
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdown"
           >
             <li>
-              <a class="dropdown-item" [routerLink]="['SignIn']">SignIn</a>
+              <!-- Changed the text for sign in and sign up. They no longer appear as SignIn/SignUp, now they are Sign In/Sign Up -->
+              <!-- Change made by Renato Scudere. -->
+              <a class="dropdown-item" [routerLink]="['SignIn']">Sign In</a>
             </li>
             <li>
               <hr class="dropdown-divider" />
             </li>
             <li>
-              <a class="dropdown-item" [routerLink]="['SignUp']">SignUp</a>
+              <a class="dropdown-item" [routerLink]="['SignUp']">Sign Up</a>
             </li>
           </ul>
         </li>
