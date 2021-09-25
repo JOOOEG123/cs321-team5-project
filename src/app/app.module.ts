@@ -15,6 +15,7 @@ import { PagesComponent } from './pages';
 import { MapSelectComponent } from './pages/map-select/map-select.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
