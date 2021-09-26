@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DndMap } from '@core/models/auth/map.model';
 import { FirebaseService } from '@core/services/firebase/firebase.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DB_CONFIG } from 'src/environments/environment';
+import { AddModalComponent } from './add-modal/add-modal.component';
 
 @Component({
   selector: 'app-map-select',
@@ -11,9 +13,11 @@ import { DB_CONFIG } from 'src/environments/environment';
 export class MapSelectComponent implements OnInit {
 
   maps = [] as DndMap[];
+  addMapModal?: BsModalRef;
 
   constructor(
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -39,12 +43,7 @@ export class MapSelectComponent implements OnInit {
   }
 
   newMap() {
-    console.log('new map clicked');
-    this.firebaseService.saveEntry(this.maps[0], DB_CONFIG.map_endpoint).then(id => {
-      this.maps[0].id = id;
-    }).catch(err => {
-      throw new err;
-    })
+    this.addMapModal = this.modalService.show(AddModalComponent);
   }
 
 }
