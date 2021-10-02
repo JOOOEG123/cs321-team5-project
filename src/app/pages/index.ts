@@ -7,6 +7,7 @@ import { Routes } from '@angular/router';
 import { AngularFireAuthGuard, canActivate } from '@angular/fire/auth-guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { onlyAllowSeft, redirectLoggedInToByRoutes } from '../app-routing.pipe';
+import { MapSelectComponent } from './map-select/map-select.component';
 
 export const PagesComponent = [
   HomepageNoAuthComponent,
@@ -14,7 +15,8 @@ export const PagesComponent = [
   SignInComponent,
   SignUpComponent,
   UserProfileComponent,
-  AboutUsComponent
+  AboutUsComponent,
+  MapSelectComponent,
 ];
 
 export const PagesRoutes: Routes = [
@@ -41,6 +43,12 @@ export const PagesRoutes: Routes = [
     canActivate: [AngularFireAuthGuard],
     component: UserProfileComponent,
     data: { authGuardPipe: onlyAllowSeft, title: 'Profile' },
+  },
+  {
+    path: 'map-select',
+    canActivate: [AngularFireAuthGuard],
+    component: MapSelectComponent,
+    data: { title: 'Map Select' },
   },
 
   // Routing for the AboutUsComponent.
