@@ -8,6 +8,7 @@ import { AngularFireAuthGuard, canActivate } from '@angular/fire/auth-guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { onlyAllowSeft, redirectLoggedInToByRoutes } from '../app-routing.pipe';
 import { MapSelectComponent } from './map-select/map-select.component';
+import { AddModalComponent } from './map-select/add-modal/add-modal.component';
 
 export const PagesComponent = [
   HomepageNoAuthComponent,
@@ -17,6 +18,7 @@ export const PagesComponent = [
   UserProfileComponent,
   AboutUsComponent,
   MapSelectComponent,
+  AddModalComponent
 ];
 
 export const PagesRoutes: Routes = [
