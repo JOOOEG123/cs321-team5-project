@@ -56,7 +56,6 @@ export class AuthService {
   signOut() {
     this.auth.signOut();
     this.router.navigate(['hp', 'Homepage']);
-    console.log('signOut');
     this._authState.next(false);
   }
 

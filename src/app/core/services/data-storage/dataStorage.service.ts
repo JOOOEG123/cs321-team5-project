@@ -46,10 +46,8 @@ export class DataStorageService {
 
   addUserMap(mapObj: any, id: string | undefined) {
     try {
-      console.log('run');
       return this.fireStore.doc<any>(`user-maps/${id}`).set(mapObj);
     } catch (error) {
-      console.log('fail');
       throw error;
     }
   }

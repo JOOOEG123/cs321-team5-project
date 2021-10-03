@@ -24,7 +24,6 @@ export class MapSelectComponent implements OnInit {
 
   ngOnInit(): void {
     this.userMapService.userMap.subscribe((userMap) => {
-      console.log(userMap)
       this.maps = userMap;
     });
   }

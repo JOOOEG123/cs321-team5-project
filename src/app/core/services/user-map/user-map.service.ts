@@ -84,7 +84,6 @@ export class UserMapService {
 
   async getAllUserMaps() {
     const user = await this.auth.currentUser;
-    console.log("uid", user?.uid);
     const data = (
       await this.dataStorage.getUserMap(user?.uid).toPromise()
     ).data();
