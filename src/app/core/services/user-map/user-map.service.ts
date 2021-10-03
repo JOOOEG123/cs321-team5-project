@@ -1,3 +1,4 @@
+import { uuidv4 } from '@core/helper';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
@@ -24,6 +25,10 @@ export class UserMapService {
     if (!mapObj.createdDate) {
       mapObj.createdDate = new Date().toString();
     }
+    if(!index) {
+      mapObj.uuid = user?.uid;
+      mapObj.id =  uuidv4('user-map');
+    }
     mapObj.modifiedDate = new Date().toString();
     try {
       const allUserMap = await this.getAllUserMaps();
@@ -32,6 +37,7 @@ export class UserMapService {
         if (index && user_maps) {
           user_maps[index] = mapObj;
         } else if (user_maps) {
+
           user_maps.push(mapObj);
         }
         this._userMap.next(user_maps);
@@ -73,7 +79,8 @@ export class UserMapService {
       mapObj.createdDate = new Date().toString();
     }
     mapObj.modifiedDate = new Date().toString();
-    mapObj.id = user?.uid;
+    mapObj.uuid = user?.uid;
+    mapObj.id =  uuidv4('user-map');
     try {
       return this.dataStorage.addUserMap({ user_maps: mapObj }, user?.uid);
     } catch (error) {
