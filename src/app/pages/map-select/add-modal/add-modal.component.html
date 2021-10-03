@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Add New Map</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="signInForm" (ngSubmit)="addMap()">
+    <div
+      class="form-floating mb-3"
+      *ngFor="let formControl of formConst"
+    >
+      <input
+        type="text"
+        class="form-control"
+        [id]="formControl.formControl + '-regist'"
+        [formControlName]="formControl.formControl"
+        [placeholder]="formControl.placeholder"
+        [ngClass]="{
+          'is-invalid':
+            signInForm.controls[formControl.formControl].invalid &&
+            signInForm.controls[formControl.formControl].touched
+        }"
+        [attr.aria-describedby]="formControl.formControl + '-error'"
+      />
+      <label [for]="formControl.formControl + '-regist'">
+        {{ formControl.placeholder }}
+      </label>
+
+      <small
+        [id]="formControl.formControl + '-error'"
+        class="invalid-feedback"
+      >
+        {{ formControl.placeholder }} is required
+      </small>
+    </div>
+
+    <div class="d-grid mb-2">
+      <button
+        class="
+          btn btn-lg btn-primary btn-login
+          fw-bold
+          text-uppercase
+        "
+        [disabled]="signInForm.invalid"
+        type="submit"
+      >
+        Add Map
+      </button>
+    </div>
+  </form>
+</div>

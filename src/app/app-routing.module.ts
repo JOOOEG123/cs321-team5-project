@@ -25,10 +25,6 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'map-select',
-    component: MapSelectComponent,
-  },
-  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'hp/Homepage',
