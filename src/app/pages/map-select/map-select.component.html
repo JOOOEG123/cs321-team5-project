@@ -1,34 +1,33 @@
-<body>
-  <!-- header -->
-
-  <!-- map box -->
-  <div class='map-container' (click)='clicked(map)' *ngFor='let map of maps'>
-    <img class='map-img' src='{{map.imageUrl}}'>
-    <div class='map-overlay'>
-      <div class='map-spacer'>
-        <p class='map-title'>
-          {{map.name}}
-        </p>
-        <p class='map-subtitle'>
-          {{map.description}}
-        </p>
+<div class="container-fluid my-5">
+  <div class="row">
+    <div
+      class="col-12 col-sm-6 col-md-3"
+      *ngFor="let map of maps; let i = index"
+    >
+      <div class="card bg-white h-100 w-100 shadow rounded-lg">
+        <img [src]="map.imageUrl" class="card-img img-fluid boarder-0" alt="" width="100%" />
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ map.name }}</h5>
+          <p class="card-text text-center">{{ map.description }}</p>
+          <button class="btn text-right" type="button" (click)="deleteMap(i)">
+            <img src="assets/icons/dashboard/delete.svg" alt="" width="30" />
+          </button>
+        </div>
       </div>
     </div>
-
-  </div>
-
-  <div class='map-container' (click)='newMap()'>
-    <div class='map-overlay'>
-      <div class='map-spacer'>
-        <p class='map-title'>
-          Add New Map
-        </p>
-        <p class='map-subtitle'>
-          Click here
-        </p>
+    <div class="col-12 col-sm-6 col-md-3">
+      <div
+        class="card bg-dark text-white text-center rounded-lg shadow h-100"
+        role="button"
+        aria-label="Add new map"
+        (click)="newMap()"
+      >
+        <img src="assets/images/dashboard/newmap.jpg" class="card-img" alt="" />
+        <div class="card-img-overlay">
+          <h5 class="card-title fw-bold bg-secondary">Add new map</h5>
+          <p class="card-text">Click to add new map to your storage</p>
+        </div>
       </div>
     </div>
-
   </div>
-
-</body>
+</div>

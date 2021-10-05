@@ -1,1 +1,54 @@
-<pre *ngIf="profileDetails | async as k"> {{ k | json }} </pre>
+<div class="container-fluid">
+  <div class="row my-auto" *ngIf="profileDetails | async as k">
+    <div class="col-12 text-center">
+      <img
+        src="assets/icons/profile/user.svg"
+        alt="profile image"
+        class="rounded-circle border shadow"
+        width="100"
+      />
+      <h3 class="text-primary">{{ k.firstName }} {{ k.lastName }}</h3>
+    </div>
+    <h4 class="text-primary mt-5">Basic Information</h4>
+    <div class="col-6 mr-2">
+      <div class="card">
+        <div class="card-body">
+          <div class="my-4">
+            <span class="fw-bold">Full Name</span>
+            <span class="float-end">{{ k.firstName }} {{ k.lastName }}</span>
+          </div>
+          <div class="my-4">
+            <span class="fw-bold">Email</span>
+            <span class="float-end">{{ k.email }}</span>
+          </div>
+          <div class="my-4">
+            <span class="fw-bold">Date of Birth</span>
+            <span class="float-end">{{ k.dob }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="my-4">
+            <span class="fw-bold">User Name</span>
+            <span class="float-end">{{ k.userName }}</span>
+          </div>
+          <div class="my-4">
+            <span class="fw-bold">Created date</span>
+            <span class="float-end">{{ k.createdt }}</span>
+          </div>
+          <div class="my-4">
+            <span class="fw-bold">Last updated date</span>
+            <span class="float-end">{{ k.moddt }}</span>
+          </div>
+          <div class="my-4">
+            <span class="fw-bold">Country</span>
+            <span class="float-end">{{ k.country }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

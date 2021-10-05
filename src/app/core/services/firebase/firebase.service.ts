@@ -10,6 +10,8 @@ export class FirebaseService {
   entryCollection!: AngularFirestoreCollection;
   private entryDoc!: AngularFirestoreDocument;
 
+
+
   constructor(
     private afs: AngularFirestore,
   ) { }

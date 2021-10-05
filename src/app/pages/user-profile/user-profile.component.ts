@@ -8,12 +8,10 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
   private _document!: AngularFirestoreDocument<UserProfile>;
   uid: string | undefined;
-  // profileDetails!: Observable<DocumentData | undefined>;
   profileDetails!: Observable<UserProfile | undefined>;
 
   constructor(
@@ -26,7 +24,6 @@ export class UserProfileComponent implements OnInit {
     if (this.uid !== undefined) {
       this._document = this.dataStorage.getProfileDetails(this.uid);
       this.profileDetails = this._document.valueChanges();
-      //this.details = await this.profileDetails.pipe(take(1)).toPromise();
     }
   }
 }
