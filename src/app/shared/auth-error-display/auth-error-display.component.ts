@@ -11,6 +11,7 @@ export class AuthErrorDisplayComponent implements OnInit {
   errors: any[] = [];
   subErrors!: Subscription;
   constructor(private auth: AuthService) {}
+
   ngOnInit() {
     this.subErrors = this.auth.authError.subscribe((x: any) => {
       this.errors = x;
@@ -18,5 +19,9 @@ export class AuthErrorDisplayComponent implements OnInit {
         this.subErrors && this.subErrors.unsubscribe();
       }
     });
+  }
+
+  onClosed(){
+    this.auth.clearErrors();
   }
 }

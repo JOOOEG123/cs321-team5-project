@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-signIn',
   templateUrl: './signIn.component.html',
-  styleUrls: ['./signIn.component.scss']
+  styleUrls: ['./signIn.component.scss'],
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   signInForm = this.createForm();
   formConst = [
     {
@@ -17,20 +17,22 @@ export class SignInComponent {
     {
       formControl: 'password',
       placeholder: 'Password',
-      type: 'password'
-    }
+      type: 'password',
+    },
   ];
 
-  listOfCountries:any;
+  listOfCountries: any;
   constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   createForm() {
-    return this.fb.group(
-      {
-        email: ['', Validators.required],
-        password: ['', Validators.required],
-      }
-    );
+    return this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  ngOnInit() {
+    this.auth.clearErrors();
   }
 
   signIn() {

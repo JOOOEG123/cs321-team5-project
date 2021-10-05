@@ -77,4 +77,8 @@ export class AuthService {
       this.router.navigate(['hp', 'profile', user?.uid]);
     }
   }
+
+  clearErrors() {
+    this._authError.next([]);
+  }
 }
