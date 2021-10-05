@@ -12,7 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllLayoutComponents } from './layout';
 import { PagesComponent } from './pages';
 import { CommonModule } from '@angular/common';
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxBootstrapModule } from '@core/modules/ngx-bootstrap/ngx-bootstrap.module';
+import { AuthErrorDisplayComponent } from './shared/auth-error-display/auth-error-display.component';
+import { SharedComponent } from './shared';
+
 
 
 @NgModule({
@@ -20,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AppComponent,
     ...AllLayoutComponents,
     ...PagesComponent,
+    ...SharedComponent
   ],
   imports: [
     AngularFireAuthModule,
@@ -32,7 +36,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ModalModule.forRoot(),
+    NgxBootstrapModule
   ],
   providers: [],
   bootstrap: [AppComponent]

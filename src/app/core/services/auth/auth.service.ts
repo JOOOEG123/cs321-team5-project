@@ -11,6 +11,8 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private _authState = new BehaviorSubject<boolean>(false);
   readonly authState = this._authState.asObservable();
+  private _authError = new BehaviorSubject<any[]>([]);
+  readonly authError = this._authError.asObservable();
   user: any;
 
   constructor(
@@ -20,8 +22,8 @@ export class AuthService {
   ) {}
 
   async signInOrSignOut(user: AuthUser, isSignIn: boolean) {
+    let apiCall;
     try {
-      let apiCall;
       const { firstName, lastName, email, password } = user;
       if (isSignIn) {
         apiCall = await this.auth.signInWithEmailAndPassword(email, password);
@@ -48,9 +50,13 @@ export class AuthService {
           lastName,
           uid: userd.uid,
         });
+        this._authError.next([]);
       }
       this.routeOnLogin();
-    } catch (err) {}
+    } catch (err) {
+      this._authError.next([err]);
+    }
+    return apiCall;
   }
 
   signOut() {
