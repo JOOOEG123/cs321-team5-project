@@ -9,6 +9,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { onlyAllowSeft, redirectLoggedInToByRoutes } from '../app-routing.pipe';
 import { MapSelectComponent } from './map-select/map-select.component';
 import { AddModalComponent } from './map-select/add-modal/add-modal.component';
+import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 
 export const PagesComponent = [
   HomepageNoAuthComponent,
@@ -18,7 +19,8 @@ export const PagesComponent = [
   UserProfileComponent,
   AboutUsComponent,
   MapSelectComponent,
-  AddModalComponent
+  AddModalComponent,
+  UserProfileComponent,
 ];
 
 export const PagesRoutes: Routes = [
@@ -59,5 +61,13 @@ export const PagesRoutes: Routes = [
     path: 'AboutUs',
     component: AboutUsComponent,
     data: {title: 'About Us'}
+  },
+
+  {
+    path: 'NavBar',
+    canActivate: [AngularFireAuthGuard],
+    component: UserNavBarComponent,
+    data: { title: 'NavBar' },
   }
+
 ];

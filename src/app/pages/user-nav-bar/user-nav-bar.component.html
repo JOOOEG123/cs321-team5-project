@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!--Code implements the navbar-->
+    <nav class="col-md-2 d-none d-md-block bg-dark sidebar text-light">
+      <div class="sidebar-sticky">
+
+        <!--Header-->
+        <h4>Welcome</h4>
+        <hr>
+
+        <!--Search Bar-->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
+          <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
+        </form>
+
+        <!--My Accounts button-->
+        <ul class="nav nav-pills d-flex flex-column">
+          <li class="nav-item p-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed text-primary" data-bs-toggle="collapse" data-bs-target="#accnt-collapse" aria-expanded="false">
+              My Account
+            </button>
+            <div class="collapse" id="accnt-collapse">
+              <ul class="nav nav-pills d-flex flex-column">
+                <li><a class="nav-link" href="#">Profile</a></li>
+                <li><a class="nav-link" href="#">Settings</a></li>
+              </ul>
+            </div>
+
+          <!--My Maps link-->
+          <li class="nav-item"><a class="nav-link" href="#">My Maps</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+</div>
