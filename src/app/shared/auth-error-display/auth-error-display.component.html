@@ -1,0 +1,5 @@
+<div class="shadow" *ngFor="let alert of errors">
+  <alert type="danger" [dismissible]="true"  (onClosed)="onClosed()"><small>{{ alert.message }}</small></alert>
+</div>
+
+

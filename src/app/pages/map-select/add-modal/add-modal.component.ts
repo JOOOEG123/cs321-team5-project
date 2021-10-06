@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FirebaseService } from '@core/services/firebase/firebase.service';
+import { UserMapService } from '@core/services/user-map/user-map.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { DB_CONFIG } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-modal',
   templateUrl: './add-modal.component.html',
-  styleUrls: ['./add-modal.component.scss']
+  styleUrls: ['./add-modal.component.scss'],
 })
 export class AddModalComponent implements OnInit {
-
   signInForm = this.createForm();
 
   formConst = [
@@ -31,29 +29,21 @@ export class AddModalComponent implements OnInit {
   constructor(
     public modalRef: BsModalRef,
     private fb: FormBuilder,
-    private firebaseService: FirebaseService
-  ) { }
+    private userMapService: UserMapService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   createForm() {
-    return this.fb.group(
-      {
-        name: ['', Validators.required],
-        description: ['', Validators.required],
-        imageUrl: ['', Validators.required],
-      }
-    );
+    return this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+    });
   }
 
   addMap() {
-    this.firebaseService.saveEntry(this.signInForm.value, DB_CONFIG.map_endpoint).then(data => {
-      console.log('successful save',data);
-      this.modalRef.hide();
-    }).catch(err => {
-      throw err;
-    })
+    this.userMapService.updateUserMap(this.signInForm.value);
+    this.modalRef.hide();
   }
-
 }

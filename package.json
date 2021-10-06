@@ -11,7 +11,7 @@
     "build:prod": "ng build --configuration=production",
     "firebase:login": "firebase login",
     "deploy:firestore": "firebase deploy --only firestore:rules",
-    "deploy:fireStorage": "firebase deploy --only firestore:storage"
+    "deploy:fireStorage": "firebase deploy --only storage:rules"
   },
   "private": true,
   "dependencies": {
