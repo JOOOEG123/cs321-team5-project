@@ -64,8 +64,6 @@ export class SignUpComponent implements OnInit {
     this.dataserv.getCountry().then((x) => (this.listOfCountries = x));
   }
 
-  ngOnInit() {}
-
   createForm() {
     return this.fb.group(
       {
@@ -87,6 +85,10 @@ export class SignUpComponent implements OnInit {
   comparePasswords(control: AbstractControl): ValidationErrors | null {
     const { password, confirmPassword } = control.value;
     return password !== confirmPassword ? { noMatch: true } : null;
+  }
+
+  ngOnInit() {
+    this.auth.clearErrors();
   }
 
   register() {

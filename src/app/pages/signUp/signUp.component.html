@@ -9,7 +9,11 @@
             <!-- Background image for card set in CSS! -->
           </div>
           <div class="card-body p-4 p-sm-5">
-            <h5 class="card-title text-center mb-5 fW fs-5">Register</h5>
+            <ng-container
+              *ngTemplateOutlet="passwordCompareErrorTemplate"
+            ></ng-container>
+            <app-auth-error-display></app-auth-error-display>
+            <h3 class="card-title text-center mb-5 fw-bold text-primary shadow-sm py-2 rounded-lg">Register</h3>
             <form [formGroup]="signUpForm" (ngSubmit)="register()">
               <div
                 class="form-floating mb-3"
@@ -45,6 +49,7 @@
                 />
                 <label [for]="formControl.formControl + '-regist'">
                   {{ formControl.placeholder }}
+                  <span class="text-danger">*</span>
                 </label>
 
                 <datalist
@@ -89,3 +94,29 @@
     </div>
   </div>
 </body>
+
+<ng-template #passwordCompareErrorTemplate>
+  <ng-container
+    *ngIf="
+      signUpForm.controls['password'].touched &&
+      signUpForm.controls['confirmPassword'].touched
+    "
+  >
+    <alert
+      type="danger"
+      *ngIf="
+        signUpForm.value['password'] !== signUpForm.value['confirmPassword']
+      "
+    >
+      <strong>Oh snap!</strong> The passwords do not match.
+    </alert>
+    <alert
+      type="success"
+      *ngIf="
+        signUpForm.value['password'] === signUpForm.value['confirmPassword']
+      "
+    >
+      <strong>Yay!</strong> The passwords match.
+    </alert>
+  </ng-container>
+</ng-template>
