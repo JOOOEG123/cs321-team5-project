@@ -1,38 +1,50 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row flex-nowrap">
 
-    <!--Code implements the navbar-->
-    <nav class="col-md-2 d-none d-md-block bg-dark sidebar text-light">
-      <div class="sidebar-sticky">
+    <div class="col-auto px-2 bg-dark">
 
-        <!--Header-->
-        <h4>Welcome</h4>
-        <hr>
+      <!--Code implements the navbar-->
+      <div id="sidebar" class="collapse-horizontal show bg-dark text-light">
+        <div class="sidebar-sticky">
 
-        <!--Search Bar-->
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
-          <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
-        </form>
+          <!--Header-->
+          <div class="sidebar-header pt-2">
+           <h4>Welcome</h4>
+           <hr>
+         </div>
 
-        <!--My Accounts button-->
-        <ul class="nav nav-pills d-flex flex-column">
-          <li class="nav-item p-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed text-primary" data-bs-toggle="collapse" data-bs-target="#accnt-collapse" aria-expanded="false">
-              My Account
-            </button>
-            <div class="collapse" id="accnt-collapse">
-              <ul class="nav nav-pills d-flex flex-column">
-                <li><a class="nav-link" href="#">Profile</a></li>
-                <li><a class="nav-link" href="#">Settings</a></li>
-              </ul>
-            </div>
+         <!--Search Bar-->
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
+            <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
+          </form>
 
-          <!--My Maps link-->
-          <li class="nav-item"><a class="nav-link" href="#">My Maps</a></li>
-        </ul>
+          <!--My Accounts button-->
+          <ul class="nav d-flex flex-column">
+            <li class="nav-item p-1 text-truncate">
+              <button class="btn btn-toggle align-items-center rounded collapsed text-primary" data-bs-toggle="collapse" data-bs-target="#accnt-collapse" aria-expanded="false">
+                My Account
+              </button>
+              <div class="collapse" id="accnt-collapse">
+                <ul class="nav d-flex flex-column">
+                  <li><a class="nav-link" href="#">Profile</a></li>
+                  <li><a class="nav-link" href="#">Settings</a></li>
+                </ul>
+              </div>
+
+            <!--My Maps link-->
+            <li class="nav-item text-truncate"><a class="nav-link" href="#">My Maps</a></li>
+          </ul>
+        </div>
       </div>
-    </nav>
+    </div>
+
+    <div class="col-auto px-2">
+      <!--Button for opening and closing the navbar-->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="assets/icons/homepage/menu.svg" alt="menu" style="display: block" class="rounded-circle shadow" height="40"/>
+      </button>
+    </div>
 
   </div>
 </div>

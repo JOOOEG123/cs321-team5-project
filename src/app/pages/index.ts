@@ -21,6 +21,7 @@ export const PagesComponent = [
   MapSelectComponent,
   AddModalComponent,
   UserProfileComponent,
+  UserNavBarComponent
 ];
 
 export const PagesRoutes: Routes = [
