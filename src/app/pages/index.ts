@@ -46,7 +46,7 @@ export const PagesRoutes: Routes = [
   {
     path: 'profile/:id',
     canActivate: [AngularFireAuthGuard],
-    component: UserProfileComponent,
+    component: UserNavBarComponent,
     data: { authGuardPipe: onlyAllowSeft, title: 'Profile' },
   },
   {
@@ -63,12 +63,4 @@ export const PagesRoutes: Routes = [
     component: AboutUsComponent,
     data: {title: 'About Us'}
   },
-
-  {
-    path: 'NavBar',
-    canActivate: [AngularFireAuthGuard],
-    component: UserNavBarComponent,
-    data: { title: 'NavBar' },
-  }
-
 ];
