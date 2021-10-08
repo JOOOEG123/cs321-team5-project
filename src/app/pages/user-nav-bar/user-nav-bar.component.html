@@ -1,10 +1,10 @@
 <div class="container-fluid" height="300px">
   <div class="row flex-nowrap">
 
-    <div class="col-auto px-2 bg-dark">
+    <div id="sidebar-col" class="collapse-horizontal show col-auto px-0 bg-dark">
 
       <!--Code implements the navbar-->
-      <div id="sidebar" class="collapse-horizontal show bg-dark text-light">
+      <div id="sidebar" class="show bg-dark text-light px-2">
         <div class="sidebar-sticky">
 
           <!--Header-->
@@ -41,7 +41,7 @@
 
     <div class="col-auto px-2">
       <!--Button for opening and closing the navbar-->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-col" aria-controls="sidebar-col" aria-expanded="false" aria-label="Toggle navigation">
         <img src="assets/icons/homepage/menu.svg" alt="menu" style="display: block" class="rounded-circle shadow" height="40"/>
       </button>
     </div>
