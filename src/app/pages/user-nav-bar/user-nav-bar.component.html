@@ -26,9 +26,9 @@
                 My Account
               </button>
               <div class="collapse" id="accnt-collapse">
-                <div class="nav flex-column nav-pills" id="account-info" role="tablist" aria-orientation="vertical">
-                  <a class="nav-link active" id="accountDetailsTab" data-toggle="pill" href="#user-details" role="tab" aria-controls="user-details" aria-selected="true">Profile</a>
-                  <a class="nav-link" id="accountSettingsTab" data-toggle="pill" href="#account-settings" role="tab" aria-controls="account-settings" aria-selected="false">Settings</a>
+                <div class="nav flex-column" id="account-info" role="tablist" aria-orientation="vertical">
+                  <div [routerLink]="['']" fragment="user-details"><a class="nav-link active" id="accountDetailsTab" data-toggle="tab" href="#user-details" role="tab" aria-controls="user-details" aria-selected="true">Profile</a></div>
+                  <div [routerLink]="['']" fragment="account-settings"><a class="nav-link" id="accountSettingsTab" data-toggle="tab" href="#account-settings" role="tab" aria-controls="account-settings" aria-selected="false">Settings</a></div>
                 </div>
               </div>
 
@@ -46,13 +46,14 @@
       </button>
     </div>
 
+    <!--Content to be displayed-->
     <div class="col-auto px-2">
       <div class="tab-content" id="account-info-tabContent">
         <div class="tab-pane fade show active" id="user-details" role="tabpanel" aria-labelledby="accountDetailsTab">
           <app-user-profile></app-user-profile>
         </div>
         <div class="tab-pane fade" id="account-settings" role="tabpanel" aria-labelledby="accountSettingsTab">
-          <p>hello</p>
+          <p>Settings page link</p>
         </div>
       </div>
     </div>
