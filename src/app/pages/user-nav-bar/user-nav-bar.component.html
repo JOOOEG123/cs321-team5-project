@@ -26,10 +26,12 @@
                 My Account
               </button>
               <div class="collapse" id="accnt-collapse">
-                <div class="nav flex-column" id="account-info" role="tablist" aria-orientation="vertical">
-                  <div [routerLink]="['']" fragment="user-details"><a class="nav-link active" id="accountDetailsTab" data-toggle="tab" href="#user-details" role="tab" aria-controls="user-details" aria-selected="true">Profile</a></div>
-                  <div [routerLink]="['']" fragment="account-settings"><a class="nav-link" id="accountSettingsTab" data-toggle="tab" href="#account-settings" role="tab" aria-controls="account-settings" aria-selected="false">Settings</a></div>
-                </div>
+                <nav>
+                  <div class="nav nav-tabs flex-column pt-1" id="nav-tab" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link active bg-dark border-0 text-truncate" id="nav-user-accnt-tab" data-bs-toggle="tab" data-bs-target="#user-details" type="button" role="tab" aria-controls="user-details" aria-selected="true">Profile</button>
+                    <button class="nav-link bg-dark border-0 text-truncate" id="nav-user-settings-tab" data-bs-toggle="tab" data-bs-target="#account-settings" type="button" role="tab" aria-controls="account-settings" aria-selected="false">Settings</button>
+                  </div>
+                </nav>
               </div>
 
             <!--My Maps link-->
@@ -48,11 +50,11 @@
 
     <!--Content to be displayed-->
     <div class="col-auto px-2">
-      <div class="tab-content" id="account-info-tabContent">
-        <div class="tab-pane fade show active" id="user-details" role="tabpanel" aria-labelledby="accountDetailsTab">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="user-details" role="tabpanel" aria-labelledby="nav-user-accnt-tab">
           <app-user-profile></app-user-profile>
         </div>
-        <div class="tab-pane fade" id="account-settings" role="tabpanel" aria-labelledby="accountSettingsTab">
+        <div class="tab-pane fade" id="account-settings" role="tabpanel" aria-labelledby="nav-user-settings-tab">
           <p>Settings page link</p>
         </div>
       </div>
