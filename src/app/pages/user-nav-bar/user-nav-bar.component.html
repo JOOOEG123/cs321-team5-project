@@ -19,7 +19,7 @@
             <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
           </form>
 
-          <!--My Accounts button-->
+          <!--Tab list w/ links to each window-->
           <nav class="box">
             <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
               <button class="nav-link bg-dark border-0 text-truncate text-start px-0" id="nav-user-accnt-tab" data-bs-toggle="tab" data-bs-target="#user-details" type="button" role="tab" aria-controls="user-details" aria-selected="false">My Account</button>
@@ -33,6 +33,7 @@
     </div>
 
     <div class="col-auto px-2">
+
       <!--Button for opening and closing the navbar-->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-col" aria-controls="sidebar-col" aria-expanded="false" aria-label="Toggle navigation">
         <img src="assets/icons/homepage/menu.svg" alt="menu" style="display: block" class="rounded-circle shadow" height="40"/>
@@ -46,9 +47,10 @@
           <app-user-profile></app-user-profile>
         </div>
         <div class="tab-pane fade" id="account-settings" role="tabpanel" aria-labelledby="nav-user-settings-tab">
-          <p>Settings page link</p>
+          <h2 style="text-align: center;">Account Settings</h2>
         </div>
         <div class="tab-pane fade show active" id="user-maps" role="tabpanel" aria-labelledby="nav-user-maps-tab">
+          <h2 style="text-align: center;">{{usr.firstName}} {{usr.lastName}}'s Maps</h2>
           <app-map-select></app-map-select>
         </div>
       </div>
