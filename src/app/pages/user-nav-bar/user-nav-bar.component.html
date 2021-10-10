@@ -1,5 +1,5 @@
-<div class="container-fluid" height="300px">
-  <div class="row flex-nowrap">
+<div class="container-fluid">
+  <div class="row flex-nowrap" *ngIf="profileDetails | async as usr">
 
     <div id="sidebar-col" class="collapse-horizontal show col-auto px-0 bg-dark">
 
@@ -9,7 +9,7 @@
 
           <!--Header-->
           <div class="sidebar-header pt-2">
-           <h4>Welcome</h4>
+           <h4 class="text-truncate">Welcome {{usr.firstName}}</h4>
            <hr>
          </div>
 
@@ -20,23 +20,14 @@
           </form>
 
           <!--My Accounts button-->
-          <ul class="nav d-flex flex-column">
-            <li class="nav-item p-1 text-truncate">
-              <button class="btn btn-toggle align-items-center rounded collapsed text-primary" data-bs-toggle="collapse" data-bs-target="#accnt-collapse" aria-expanded="false">
-                My Account
-              </button>
-              <div class="collapse" id="accnt-collapse">
-                <nav>
-                  <div class="nav nav-tabs flex-column pt-1" id="nav-tab" role="tablist" aria-orientation="vertical">
-                    <button class="nav-link active bg-dark border-0 text-truncate" id="nav-user-accnt-tab" data-bs-toggle="tab" data-bs-target="#user-details" type="button" role="tab" aria-controls="user-details" aria-selected="true">Profile</button>
-                    <button class="nav-link bg-dark border-0 text-truncate" id="nav-user-settings-tab" data-bs-toggle="tab" data-bs-target="#account-settings" type="button" role="tab" aria-controls="account-settings" aria-selected="false">Settings</button>
-                  </div>
-                </nav>
-              </div>
+          <nav class="box">
+            <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
+              <button class="nav-link bg-dark border-0 text-truncate text-start px-0" id="nav-user-accnt-tab" data-bs-toggle="tab" data-bs-target="#user-details" type="button" role="tab" aria-controls="user-details" aria-selected="false">My Account</button>
+              <button class="nav-link bg-dark border-0 active text-truncate text-start px-0" id="nav-user-maps-tab" data-bs-toggle="tab" data-bs-target="#user-maps" type="button" role="tab" aria-controls="user-maps" aria-selected="true">My Maps</button>
+              <button class="nav-link bg-dark border-0 text-truncate text-start px-0" id="nav-user-settings-tab" data-bs-toggle="tab" data-bs-target="#account-settings" type="button" role="tab" aria-controls="account-settings" aria-selected="false">Settings</button>
+            </div>
+          </nav>
 
-            <!--My Maps link-->
-            <li class="nav-item text-truncate"><a class="nav-link" href="#">My Maps</a></li>
-          </ul>
         </div>
       </div>
     </div>
@@ -51,11 +42,14 @@
     <!--Content to be displayed-->
     <div class="col-auto px-2">
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="user-details" role="tabpanel" aria-labelledby="nav-user-accnt-tab">
+        <div class="tab-pane fade" id="user-details" role="tabpanel" aria-labelledby="nav-user-accnt-tab">
           <app-user-profile></app-user-profile>
         </div>
         <div class="tab-pane fade" id="account-settings" role="tabpanel" aria-labelledby="nav-user-settings-tab">
           <p>Settings page link</p>
+        </div>
+        <div class="tab-pane fade show active" id="user-maps" role="tabpanel" aria-labelledby="nav-user-maps-tab">
+          <app-map-select></app-map-select>
         </div>
       </div>
     </div>
