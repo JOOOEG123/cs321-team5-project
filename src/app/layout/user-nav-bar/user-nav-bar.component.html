@@ -18,10 +18,10 @@
 
       <!--Tab list w/ links to each window-->
       <div class="list-group-flush pt-2">
-        <a [routerLink]="['../../Account-Details']" class="list-group-item list-group-item-action bg-dark" aria-current="true">
+        <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark" aria-current="true">
           My Account
         </a>
-        <a [routerLink]="['../../map-select']" class="list-group-item list-group-item-action bg-dark">My Maps</a>
+        <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark">My Maps</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark">Account Settings</a>
       </div>
 
