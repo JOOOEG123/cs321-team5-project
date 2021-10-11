@@ -1,5 +1,8 @@
-.box
-{
-  display: flex;
-  align-items: flex-start;
+.list-group-item {
+  color: gray;
 }
+
+.list-group-item:hover {
+  color: white;
+}
+

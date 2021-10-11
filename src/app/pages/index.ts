@@ -50,6 +50,12 @@ export const PagesRoutes: Routes = [
     data: { authGuardPipe: onlyAllowSeft, title: 'Profile' },
   },
   {
+    path: 'Account-Details',
+    canActivate: [AngularFireAuthGuard],
+    component: UserProfileComponent,
+    data: {title: 'Account Details' },
+  },
+  {
     path: 'map-select',
     canActivate: [AngularFireAuthGuard],
     component: MapSelectComponent,

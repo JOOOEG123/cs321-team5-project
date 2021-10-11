@@ -1,32 +1,49 @@
+<!--Offcanvas-->
+<div *ngIf="profileDetails | async as usr">
+  <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLink">
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Welcome {{usr.firstName}} {{usr.lastName}}</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <hr>
+
+    <div class="offcanvas-body">
+
+      <!--Search Bar-->
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
+      </form>
+
+      <!--Tab list w/ links to each window-->
+      <div class="list-group-flush pt-2">
+        <a [routerLink]="['../../Account-Details']" class="list-group-item list-group-item-action bg-dark" aria-current="true">
+          My Account
+        </a>
+        <a [routerLink]="['../../map-select']" class="list-group-item list-group-item-action bg-dark">My Maps</a>
+        <a href="#" class="list-group-item list-group-item-action bg-dark">Account Settings</a>
+      </div>
+
+  </div>
+</div>
+<!--
 <div class="container-fluid">
-  <div class="row flex-nowrap" *ngIf="profileDetails | async as usr">
+  <div class="row flex-nowrap" >
 
     <div id="sidebar-col" class="collapse-horizontal show col-auto px-0 bg-dark">
 
-      <!--Code implements the navbar-->
+      <!--Code implements the navbar
       <div id="sidebar" class="show bg-dark text-light px-2">
         <div class="sidebar-sticky">
 
-          <!--Header-->
+          <!--Header
           <div class="sidebar-header pt-2">
            <h4 class="text-truncate">Welcome {{usr.firstName}}</h4>
            <hr>
          </div>
 
-         <!--Search Bar-->
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
-            <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
-          </form>
 
-          <!--Tab list w/ links to each window-->
-          <nav class="box">
-            <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-              <button class="nav-link bg-dark border-0 text-truncate text-start px-0" id="nav-user-accnt-tab" data-bs-toggle="tab" data-bs-target="#user-details" type="button" role="tab" aria-controls="user-details" aria-selected="false">My Account</button>
-              <button class="nav-link bg-dark border-0 active text-truncate text-start px-0" id="nav-user-maps-tab" data-bs-toggle="tab" data-bs-target="#user-maps" type="button" role="tab" aria-controls="user-maps" aria-selected="true">My Maps</button>
-              <button class="nav-link bg-dark border-0 text-truncate text-start px-0" id="nav-user-settings-tab" data-bs-toggle="tab" data-bs-target="#account-settings" type="button" role="tab" aria-controls="account-settings" aria-selected="false">Settings</button>
-            </div>
-          </nav>
 
         </div>
       </div>
@@ -34,27 +51,15 @@
 
     <div class="col-auto px-2">
 
-      <!--Button for opening and closing the navbar-->
+      <!--Button for opening and closing the navbar
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-col" aria-controls="sidebar-col" aria-expanded="false" aria-label="Toggle navigation">
         <img src="assets/icons/homepage/menu.svg" alt="menu" style="display: block" class="rounded-circle shadow" height="40"/>
       </button>
     </div>
 
-    <!--Content to be displayed-->
-    <div class="col-auto px-2">
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade" id="user-details" role="tabpanel" aria-labelledby="nav-user-accnt-tab">
-          <app-user-profile></app-user-profile>
-        </div>
-        <div class="tab-pane fade" id="account-settings" role="tabpanel" aria-labelledby="nav-user-settings-tab">
-          <h2 style="text-align: center;">Account Settings</h2>
-        </div>
-        <div class="tab-pane fade show active" id="user-maps" role="tabpanel" aria-labelledby="nav-user-maps-tab">
-          <h2 style="text-align: center;">{{usr.firstName}} {{usr.lastName}}'s Maps</h2>
-          <app-map-select></app-map-select>
-        </div>
-      </div>
+
     </div>
 
   </div>
 </div>
+-->
