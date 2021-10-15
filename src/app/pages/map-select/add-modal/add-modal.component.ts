@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { UserMapService } from '@core/services/user-map/user-map.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -9,27 +10,30 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./add-modal.component.scss'],
 })
 export class AddModalComponent implements OnInit {
-  signInForm = this.createForm();
+  addMapForm = this.createForm();
 
   formConst = [
     {
       formControl: 'name',
       placeholder: 'Map Name',
+      type: 'text'
     },
     {
       formControl: 'description',
       placeholder: 'Description',
+      type: 'text'
     },
     {
       formControl: 'imageUrl',
-      placeholder: 'Image Url',
+      type: 'image'
     },
   ];
 
   constructor(
     public modalRef: BsModalRef,
     private fb: FormBuilder,
-    private userMapService: UserMapService
+    private userMapService: UserMapService,
+    private cloudStorage: CloudStorageService
   ) {}
 
   ngOnInit(): void {}
@@ -43,7 +47,17 @@ export class AddModalComponent implements OnInit {
   }
 
   addMap() {
-    this.userMapService.updateUserMap(this.signInForm.value);
+    this.userMapService.updateUserMap(this.addMapForm.value);
     this.modalRef.hide();
+  }
+
+  processImage(event: any) {
+    this.cloudStorage.uploadToUsersImages(event.target.files[0]).then(url => {
+      url.subscribe(imageUrl => {
+        this.addMapForm.controls.imageUrl.setValue(imageUrl);
+        this.addMapForm;
+      });
+    })
+
   }
 }

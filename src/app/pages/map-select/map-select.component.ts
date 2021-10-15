@@ -26,6 +26,7 @@ export class MapSelectComponent implements OnInit {
     this.userMapService.userMap.subscribe((userMap) => {
       this.maps = userMap;
     });
+    this.newMap();
   }
 
   clicked(map: DndMap) {

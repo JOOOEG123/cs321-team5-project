@@ -5,21 +5,34 @@
   </button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="signInForm" (ngSubmit)="addMap()">
+  <form [formGroup]="addMapForm" (ngSubmit)="addMap()">
+    <div class="form-floating mb-3">
+
+    </div>
     <div
       class="form-floating mb-3"
       *ngFor="let formControl of formConst"
     >
+      <!-- ImageAcceptor -->
+      <input
+      type='file'
+      accept='image/*'
+      *ngIf='formControl.type === "image"'
+      [formControlName]="formControl.formControl"
+      (change)='processImage($event)'>
+      <!-- ImageAcceptor /-->
+
       <input
         type="text"
         class="form-control"
+        *ngIf='formControl.type === "text"'
         [id]="formControl.formControl + '-regist'"
         [formControlName]="formControl.formControl"
         [placeholder]="formControl.placeholder"
         [ngClass]="{
           'is-invalid':
-            signInForm.controls[formControl.formControl].invalid &&
-            signInForm.controls[formControl.formControl].touched
+            addMapForm.controls[formControl.formControl].invalid &&
+            addMapForm.controls[formControl.formControl].touched
         }"
         [attr.aria-describedby]="formControl.formControl + '-error'"
       />
@@ -42,7 +55,7 @@
           fw-bold
           text-uppercase
         "
-        [disabled]="signInForm.invalid"
+        [disabled]="addMapForm.invalid"
         type="submit"
       >
         Add Map
