@@ -12,7 +12,7 @@
       (click)='fileInput.click()'
       (dragover)='test()'
       (drop)='test2()'
-      *ngIf='showImageAdd'>
+      *ngIf='!fakeImg'>
       Add Image
       </button>
 
@@ -31,7 +31,8 @@
       >
         image is required
       </small>
-      <img style='width: 100%' [src]='addMapForm.controls.imageUrl.value'>
+      <!-- <img *ngIf='!showImageAdd' style='width: 100%' [src]='addMapForm.controls.imageUrl.value'> -->
+      <img *ngIf='fakeImg' style='width: 100%' [src]='fakeImg'>
     </div>
     <div class='col'>
       <div

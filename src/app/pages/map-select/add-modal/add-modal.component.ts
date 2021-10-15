@@ -11,7 +11,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class AddModalComponent implements OnInit {
   addMapForm = this.createForm();
-  showImageAdd = true;
+  fakeImg: any;
+  imgFile: any;
 
   formConst = [
     {
@@ -38,7 +39,7 @@ export class AddModalComponent implements OnInit {
     private cloudStorage: CloudStorageService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void { this.addMapForm.controls.imageUrl.setValue('some error'); }
 
   createForm() {
     return this.fb.group({
@@ -49,21 +50,26 @@ export class AddModalComponent implements OnInit {
   }
 
   addMap() {
-    if(this.addMapForm.invalid) {
+    if(this.addMapForm.invalid || !this.imgFile) {
       return;
     }
-    this.userMapService.updateUserMap(this.addMapForm.value);
-    this.modalRef.hide();
+    // tries to upload image to our storage once the user has actually decided to add the map
+    this.cloudStorage.uploadToUsersImages(this.imgFile).then(url => {
+      url.subscribe(imageUrl => {
+        this.addMapForm.controls.imageUrl.setValue(imageUrl);
+        this.userMapService.updateUserMap(this.addMapForm.value);
+        this.modalRef.hide();
+      });
+    })
   }
 
   processImage(event: any) {
-    this.cloudStorage.uploadToUsersImages(event.target.files[0]).then(url => {
-      url.subscribe(imageUrl => {
-        this.addMapForm.controls.imageUrl.setValue(imageUrl);
-        this.showImageAdd = false;
-      });
-    })
-
+    this.imgFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = data => {
+      this.fakeImg = data.target?.result;
+    }
   }
 
   test() {
