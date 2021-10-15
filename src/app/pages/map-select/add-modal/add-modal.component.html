@@ -4,49 +4,67 @@
     <span aria-hidden="true" class="visually-hidden">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  <form [formGroup]="addMapForm" (ngSubmit)="addMap()">
-    <div class="form-floating mb-3">
+<div class="modal-body container">
+  <form [formGroup]="addMapForm" (ngSubmit)="addMap()" class='row'>
+    <div class='col input-group mb-3'>
+      <button
+      class='card-img-top'
+      (click)='fileInput.click()'
+      (dragover)='test()'
+      (drop)='test2()'
+      *ngIf='showImageAdd'>
+      Add Image
+      </button>
 
-    </div>
-    <div
-      class="form-floating mb-3"
-      *ngFor="let formControl of formConst"
-    >
       <!-- ImageAcceptor -->
       <input
       type='file'
       accept='image/*'
-      *ngIf='formControl.type === "image"'
-      [formControlName]="formControl.formControl"
-      (change)='processImage($event)'>
+      (change)='processImage($event)'
+      hidden
+      #fileInput
+      >
       <!-- ImageAcceptor /-->
-
-      <input
-        type="text"
-        class="form-control"
-        *ngIf='formControl.type === "text"'
-        [id]="formControl.formControl + '-regist'"
-        [formControlName]="formControl.formControl"
-        [placeholder]="formControl.placeholder"
-        [ngClass]="{
-          'is-invalid':
-            addMapForm.controls[formControl.formControl].invalid &&
-            addMapForm.controls[formControl.formControl].touched
-        }"
-        [attr.aria-describedby]="formControl.formControl + '-error'"
-      />
-      <label [for]="formControl.formControl + '-regist'">
-        {{ formControl.placeholder }}
-      </label>
-
       <small
-        [id]="formControl.formControl + '-error'"
+        [id]="'imageUrl' + '-error'"
         class="invalid-feedback"
       >
-        {{ formControl.placeholder }} is required
+        image is required
       </small>
+      <img style='width: 100%' [src]='addMapForm.controls.imageUrl.value'>
     </div>
+    <div class='col'>
+      <div
+        class="form-floating mb-3"
+        *ngFor="let formControl of formConst"
+      >
+        <input
+          type="text"
+          class="form-control"
+          *ngIf='formControl.type === "text"'
+          [id]="formControl.formControl + '-regist'"
+          [formControlName]="formControl.formControl"
+          [placeholder]="formControl.placeholder"
+          [ngClass]="{
+            'is-invalid':
+              addMapForm.controls[formControl.formControl].invalid &&
+              addMapForm.controls[formControl.formControl].touched
+          }"
+          [attr.aria-describedby]="formControl.formControl + '-error'"
+        />
+        <label *ngIf='formControl.type === "text"' [for]="formControl.formControl + '-regist'">
+          {{ formControl.placeholder }}
+        </label>
+
+        <small
+          [id]="formControl.formControl + '-error'"
+          class="invalid-feedback"
+        >
+          {{ formControl.placeholder }} is required
+        </small>
+      </div>
+    </div>
+
 
     <div class="d-grid mb-2">
       <button

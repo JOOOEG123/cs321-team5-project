@@ -11,6 +11,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class AddModalComponent implements OnInit {
   addMapForm = this.createForm();
+  showImageAdd = true;
 
   formConst = [
     {
@@ -25,6 +26,7 @@ export class AddModalComponent implements OnInit {
     },
     {
       formControl: 'imageUrl',
+      placeholder: 'Image',
       type: 'image'
     },
   ];
@@ -47,6 +49,9 @@ export class AddModalComponent implements OnInit {
   }
 
   addMap() {
+    if(this.addMapForm.invalid) {
+      return;
+    }
     this.userMapService.updateUserMap(this.addMapForm.value);
     this.modalRef.hide();
   }
@@ -55,9 +60,17 @@ export class AddModalComponent implements OnInit {
     this.cloudStorage.uploadToUsersImages(event.target.files[0]).then(url => {
       url.subscribe(imageUrl => {
         this.addMapForm.controls.imageUrl.setValue(imageUrl);
-        this.addMapForm;
+        this.showImageAdd = false;
       });
     })
 
+  }
+
+  test() {
+    console.log('test');
+  }
+
+  test2() {
+    console.log('test2');
   }
 }
