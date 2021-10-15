@@ -34,7 +34,7 @@ export class MapSelectComponent implements OnInit {
   }
 
   newMap() {
-    this.addMapModal = this.modalService.show(AddModalComponent);
+    this.addMapModal = this.modalService.show(AddModalComponent, {class: 'modal-lg'});
   }
   deleteMap(index:number){
     this.userMapService.deleteUserMap(index);
