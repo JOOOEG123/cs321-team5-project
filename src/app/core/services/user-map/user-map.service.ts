@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { DataStorageService } from '../data-storage/dataStorage.service';
+import { CloudStorageService } from '../cloud-storage/cloud-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class UserMapService {
 
   constructor(
     private dataStorage: DataStorageService,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private cloudStorage: CloudStorageService
   ) {}
 
   getObservedUserMap(): Promise<any> {
@@ -59,12 +61,15 @@ export class UserMapService {
       const allUserMap = await this.getAllUserMaps();
       if (allUserMap) {
         const { user_maps } = allUserMap;
+        const deleted_map = user_maps[index];
         if (user_maps.length !== 0) {
           user_maps.splice(index, 1);
           this._userMap.next(user_maps);
+          this.cloudStorage.removeImage(deleted_map.imageRef);
           return this.dataStorage.addUserMap({ user_maps }, user?.uid);
         }
         this._userMap.next([]);
+        this.cloudStorage.removeImage(deleted_map.imageRef);
         return this.dataStorage.addUserMap({ user_maps: [] }, user?.uid);
       }
     } catch (error) {

@@ -26,7 +26,7 @@ export class AddModalComponent implements OnInit {
       type: 'text'
     },
     {
-      formControl: 'imageUrl',
+      formControl: 'imageRef',
       placeholder: 'Image',
       type: 'image'
     },
@@ -39,13 +39,13 @@ export class AddModalComponent implements OnInit {
     private cloudStorage: CloudStorageService
   ) {}
 
-  ngOnInit(): void { this.addMapForm.controls.imageUrl.setValue('some error'); }
+  ngOnInit(): void { this.addMapForm.controls.imageRef.setValue('some error'); }
 
   createForm() {
     return this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      imageRef: ['', Validators.required],
     });
   }
 
@@ -54,12 +54,10 @@ export class AddModalComponent implements OnInit {
       return;
     }
     // tries to upload image to our storage once the user has actually decided to add the map
-    this.cloudStorage.uploadToUsersImages(this.imgFile).then(url => {
-      url.subscribe(imageUrl => {
-        this.addMapForm.controls.imageUrl.setValue(imageUrl);
-        this.userMapService.updateUserMap(this.addMapForm.value);
-        this.modalRef.hide();
-      });
+    this.cloudStorage.uploadToUsersImages(this.imgFile).then(ref => {
+      this.addMapForm.controls.imageRef.setValue(ref);
+      this.userMapService.updateUserMap(this.addMapForm.value);
+      this.modalRef.hide();
     })
   }
 
