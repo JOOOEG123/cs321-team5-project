@@ -1,65 +1,30 @@
 <!--Offcanvas-->
-<div *ngIf="profileDetails | async as usr">
-  <div class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLink">
+<div id="offcanvas" class="offcanvas offcanvas-start bg-dark text-light" tabindex="-1"
+ aria-labelledby="offcanvasLink">
 
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">Welcome {{usr.firstName}} {{usr.lastName}}</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <div class="offcanvas-header" *ngIf="profileInfo | async as usr">
+    <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">
+      Welcome {{usr.firstName}} {{usr.lastName}}
+    </h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+
+  <div class="offcanvas-body">
+
+    <!--Search Bar-->
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
+      <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
+    </form>
+
+    <!--Tab list w/ links to each window-->
+    <div class="list-group-flush pt-2">
+      <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark" aria-current="true">
+        My Account
+      </a>
+      <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark">My Maps</a>
+      <a href="#" class="list-group-item list-group-item-action bg-dark">Account Settings</a>
     </div>
-    <hr>
-
-    <div class="offcanvas-body">
-
-      <!--Search Bar-->
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
-        <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
-      </form>
-
-      <!--Tab list w/ links to each window-->
-      <div class="list-group-flush pt-2">
-        <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark" aria-current="true">
-          My Account
-        </a>
-        <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark">My Maps</a>
-        <a href="#" class="list-group-item list-group-item-action bg-dark">Account Settings</a>
-      </div>
-
   </div>
 </div>
-<!--
-<div class="container-fluid">
-  <div class="row flex-nowrap" >
-
-    <div id="sidebar-col" class="collapse-horizontal show col-auto px-0 bg-dark">
-
-      <!--Code implements the navbar
-      <div id="sidebar" class="show bg-dark text-light px-2">
-        <div class="sidebar-sticky">
-
-          <!--Header
-          <div class="sidebar-header pt-2">
-           <h4 class="text-truncate">Welcome {{usr.firstName}}</h4>
-           <hr>
-         </div>
-
-
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-auto px-2">
-
-      <!--Button for opening and closing the navbar
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-col" aria-controls="sidebar-col" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="assets/icons/homepage/menu.svg" alt="menu" style="display: block" class="rounded-circle shadow" height="40"/>
-      </button>
-    </div>
-
-
-    </div>
-
-  </div>
-</div>
--->

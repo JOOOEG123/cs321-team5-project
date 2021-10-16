@@ -9,7 +9,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { onlyAllowSeft, redirectLoggedInToByRoutes } from '../app-routing.pipe';
 import { MapSelectComponent } from './map-select/map-select.component';
 import { AddModalComponent } from './map-select/add-modal/add-modal.component';
-import { UserNavBarComponent } from '../layout/user-nav-bar/user-nav-bar.component';
 
 export const PagesComponent = [
   HomepageNoAuthComponent,
@@ -21,7 +20,6 @@ export const PagesComponent = [
   MapSelectComponent,
   AddModalComponent,
   UserProfileComponent,
-  UserNavBarComponent
 ];
 
 export const PagesRoutes: Routes = [
