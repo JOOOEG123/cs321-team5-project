@@ -18,7 +18,8 @@ export const PagesComponent = [
   UserProfileComponent,
   AboutUsComponent,
   MapSelectComponent,
-  AddModalComponent
+  AddModalComponent,
+  UserProfileComponent,
 ];
 
 export const PagesRoutes: Routes = [
@@ -47,6 +48,12 @@ export const PagesRoutes: Routes = [
     data: { authGuardPipe: onlyAllowSeft, title: 'Profile' },
   },
   {
+    path: 'Account-Details',
+    canActivate: [AngularFireAuthGuard],
+    component: UserProfileComponent,
+    data: {title: 'Account Details' },
+  },
+  {
     path: 'map-select',
     canActivate: [AngularFireAuthGuard],
     component: MapSelectComponent,
@@ -59,5 +66,5 @@ export const PagesRoutes: Routes = [
     path: 'AboutUs',
     component: AboutUsComponent,
     data: {title: 'About Us'}
-  }
+  },
 ];
