@@ -4,36 +4,68 @@
     <span aria-hidden="true" class="visually-hidden">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  <form [formGroup]="signInForm" (ngSubmit)="addMap()">
-    <div
-      class="form-floating mb-3"
-      *ngFor="let formControl of formConst"
-    >
-      <input
-        type="text"
-        class="form-control"
-        [id]="formControl.formControl + '-regist'"
-        [formControlName]="formControl.formControl"
-        [placeholder]="formControl.placeholder"
-        [ngClass]="{
-          'is-invalid':
-            signInForm.controls[formControl.formControl].invalid &&
-            signInForm.controls[formControl.formControl].touched
-        }"
-        [attr.aria-describedby]="formControl.formControl + '-error'"
-      />
-      <label [for]="formControl.formControl + '-regist'">
-        {{ formControl.placeholder }}
-      </label>
+<div class="modal-body container">
+  <form [formGroup]="addMapForm" (ngSubmit)="addMap()" class='row'>
+    <div class='col input-group mb-3'>
+      <button
+      class='card-img-top'
+      (click)='fileInput.click()'
+      (dragover)='test()'
+      (drop)='test2()'
+      *ngIf='!fakeImg'>
+      Add Image
+      </button>
 
+      <!-- ImageAcceptor -->
+      <input
+      type='file'
+      accept='image/*'
+      (change)='processImage($event)'
+      hidden
+      #fileInput
+      >
+      <!-- ImageAcceptor /-->
       <small
-        [id]="formControl.formControl + '-error'"
+        [id]="'imageUrl' + '-error'"
         class="invalid-feedback"
       >
-        {{ formControl.placeholder }} is required
+        image is required
       </small>
+      <!-- <img *ngIf='!showImageAdd' style='width: 100%' [src]='addMapForm.controls.imageUrl.value'> -->
+      <img *ngIf='fakeImg' style='width: 100%' [src]='fakeImg'>
     </div>
+    <div class='col'>
+      <div
+        class="form-floating mb-3"
+        *ngFor="let formControl of formConst"
+      >
+        <input
+          type="text"
+          class="form-control"
+          *ngIf='formControl.type === "text"'
+          [id]="formControl.formControl + '-regist'"
+          [formControlName]="formControl.formControl"
+          [placeholder]="formControl.placeholder"
+          [ngClass]="{
+            'is-invalid':
+              addMapForm.controls[formControl.formControl].invalid &&
+              addMapForm.controls[formControl.formControl].touched
+          }"
+          [attr.aria-describedby]="formControl.formControl + '-error'"
+        />
+        <label *ngIf='formControl.type === "text"' [for]="formControl.formControl + '-regist'">
+          {{ formControl.placeholder }}
+        </label>
+
+        <small
+          [id]="formControl.formControl + '-error'"
+          class="invalid-feedback"
+        >
+          {{ formControl.placeholder }} is required
+        </small>
+      </div>
+    </div>
+
 
     <div class="d-grid mb-2">
       <button
@@ -42,7 +74,7 @@
           fw-bold
           text-uppercase
         "
-        [disabled]="signInForm.invalid"
+        [disabled]="addMapForm.invalid"
         type="submit"
       >
         Add Map
