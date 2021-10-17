@@ -16,6 +16,7 @@ import { NgxBootstrapModule } from '@core/modules/ngx-bootstrap/ngx-bootstrap.mo
 import { AuthErrorDisplayComponent } from './shared/auth-error-display/auth-error-display.component';
 import { SharedComponent } from './shared';
 import { MapViewComponent } from './pages/map-view/map-view.component';
+import { MapTrackerComponent } from './shared/map-tracker/map-tracker.component';
 
 
 
@@ -24,7 +25,7 @@ import { MapViewComponent } from './pages/map-view/map-view.component';
     AppComponent,
     ...AllLayoutComponents,
     ...PagesComponent,
-    ...SharedComponent,
+    ...SharedComponent
   ],
   imports: [
     AngularFireAuthModule,
