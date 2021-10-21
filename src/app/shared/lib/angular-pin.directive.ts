@@ -118,7 +118,7 @@ export class AngularPin implements OnInit {
 
 
   private stylePin(nextPin: Pin) : string {
-    let style : string = 'background-image: url(\'./assets/images/dashboard/marker.png\'); '+
+    let style : string = 'background-image: url(\'assets/images/dashboard/marker.png\'); '+
       'cursor:grab;position:absolute;top:' + nextPin.ycoords + 'px;left:' + nextPin.xcoords + 'px;'
     switch (nextPin.size) {
       case Size.Large:
