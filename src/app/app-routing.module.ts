@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { PagesRoutes } from './pages';
 import { HomepageNoAuthComponent } from './pages/homepageNoAuth/homepageNoAuth.component';
-import { MapSelectComponent } from './pages/map-select/map-select.component';
 
 const routes: Routes = [
   {
