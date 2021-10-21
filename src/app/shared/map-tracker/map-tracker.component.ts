@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostListener, Inject, Input, OnInit, Output, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { uuidv4 } from '@core/helper';
 import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
@@ -25,19 +26,31 @@ export class MapTrackerComponent implements OnInit {
   private updateSubject = new Subject<PinUpdate>();
   cloudUrl: any;
 
+  modalHeader:string = 'Add';
+
   @ViewChild('imageel') imageel:any;
   @ViewChild('template') template:TemplateRef<any> | undefined;
+  pinForm: FormGroup = this.createPinForm();
 
   constructor(@Inject(DOCUMENT) private document: any,
               private el: ElementRef,
               private modalService: TrackImgService,
               private viewContainerRef: ViewContainerRef,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private renderer : Renderer2, private cloudStorage: CloudStorageService) { }
+              private renderer : Renderer2,
+              private cloudStorage: CloudStorageService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.renderImage();
     this.renderPins();
+  }
+
+  createPinForm() {
+    return this.fb.group({
+      header: '',
+      text: ''
+    })
   }
 
   private async renderImage() {
@@ -60,10 +73,10 @@ export class MapTrackerComponent implements OnInit {
 
   private addAPin(vm : MapTrackerComponent, nextPin : Pin) : string {
     let spanArea = this.renderer.createElement("span");
-    if (nextPin.text) {
+    if (nextPin.header) {
       let spanCaption = this.renderer.createElement("span")
       vm.renderer.setAttribute(spanCaption, 'class','popover-box')
-      vm.renderer.setProperty(spanCaption, 'innerHTML', nextPin.text);
+      vm.renderer.setProperty(spanCaption, 'innerHTML', nextPin.header);
       vm.renderer.appendChild(spanArea, spanCaption);
     }
 
@@ -84,19 +97,19 @@ export class MapTrackerComponent implements OnInit {
     this.renderer.setAttribute(component.location.nativeElement, 'id', 'text-modal')
     this.modalService.addListener(this.updateSubject);
     let vm:any = this;
-  vm.updateSubject.asObservable().subscribe((pinUpdate: { id: any; text: string | null; }) => {
+  vm.updateSubject.asObservable().subscribe((pinUpdate: { id: any; text: string | null; header: string | null }) => {
     let pin  : Pin = vm.pinInformation.pins.find((item: { id: any; }) => item.id === pinUpdate.id);
       let index = vm.pinInformation.pins.indexOf(pin);
       let element = vm.document.getElementById(pinUpdate.id);
-      if (pinUpdate.text === null) {
+      if (pinUpdate.header === null) {
         //delete this.pinInformation.pins[pin]
         element.parentElement.removeChild(element);
         vm.pinInformation.pins.splice(index, 1);
         vm.pins.delete(pinUpdate.id)
       } else {
-        pin.text = pinUpdate.text;
+        pin.header = pinUpdate.header;
         let popOverBox = element.getElementsByClassName('popover-box')[0];
-        vm.renderer.setProperty(popOverBox, 'innerHTML', pinUpdate.text);
+        vm.renderer.setProperty(popOverBox, 'innerHTML', pinUpdate.header);
         vm.pins.set(pinUpdate.id, element);
       }
 
@@ -115,7 +128,7 @@ export class MapTrackerComponent implements OnInit {
     }console.log(this.currentId)})
     //const findIndex =  this.pins.keys().next().value. findIndex((pin: { id: string; }) => pin.id === this.currentId);
     console.log(this.pinInformation.pins);
-    this.modalService.remove()
+    this.modalService.closeModal()
   }
 
 
@@ -150,8 +163,14 @@ export class MapTrackerComponent implements OnInit {
       this.clickReceived = true;
       console.log('run')
       let pin  : Pin | any = this.pinInformation.pins.find(item => item.id === id);
-      this.modalService.open('text-modal', pin.id, pin.text, this.template);
+      this.modalHeader = 'Edit';
+
+      console.log(pin)
+      this.pinForm.patchValue(pin);
+      this.modalService.open('text-modal', pin, this.template);
       // this.modalService.open('text-modal', pin.id, pin.text);
+
+
     } else if (!this.pins.has(id) && !this.hasSelected) {
       // clicking somewhere new, therefore add a pin.
       let pin : Pin = <Pin>{};
@@ -159,11 +178,14 @@ export class MapTrackerComponent implements OnInit {
       pin.ycoords = event.offsetY;
       pin.direction = Direction.Down;
       pin.size = Size.Medium;
-      pin.text = 'New Pin';
+      pin.header = 'New Pin';
+      pin.text = undefined;
       this.pinInformation.pins.push(pin)
       this.addAPin(this, pin);
       console.log('run')
-      this.modalService.open('text-modal', pin.id, pin.text, this.template);
+      this.modalHeader = 'Add';
+      this.pinForm.patchValue(pin);
+      this.modalService.open('text-modal', pin, this.template);
     }
   }
 
@@ -215,4 +237,10 @@ export class MapTrackerComponent implements OnInit {
       }
     }
   }
+
+  save() {
+    this.modalService.save(this.pinForm.value);
+  }
+
+
 }

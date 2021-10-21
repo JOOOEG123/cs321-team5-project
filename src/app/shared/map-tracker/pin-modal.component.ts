@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
+import { PinUpdate } from './map-tracker.model';
 
 @Component({
   selector: 'app-pin-modal',
@@ -11,7 +12,7 @@ export class PinModalComponent implements OnInit, OnDestroy {
   id!: string;
 
   @Input()
-  captionText : string = '';
+  currentPinUpdate?: PinUpdate = undefined;
   pinId : string | undefined = undefined;
   private readonly element: any;
 
@@ -27,7 +28,7 @@ export class PinModalComponent implements OnInit, OnDestroy {
     // close modal on background click
     this.element.addEventListener('click', (el: { target: { className: string; }; }) => {
       if (el.target.className === 'jw-modal') {
-        this.save();
+       //  this.save();
       }
     });
 
@@ -37,28 +38,33 @@ export class PinModalComponent implements OnInit, OnDestroy {
 
   // remove self from modal service when component is destroyed
   ngOnDestroy(): void {
-    this.modalService.remove(this.id);
+    this.modalService.closeModal(this.id);
     this.element.remove();
   }
 
   // open modal
   open(id : string, captionText : string = ''): void {
-    this.captionText = captionText;
+    // this.captionText = captionText;
+
+    // this.currentPinUpdate = {
+    //   id: id,
+
+    // }
     this.pinId = id;
     this.element.style.display = 'block';
     document.body.classList.add('jw-modal-open');
   }
 
   // close modal
-  save(): void {
-    this.removeDialog();
-    this.modalService.fireUpdate({id : this.pinId, text : this.captionText});
-  }
+  // save(): void {
+  //   this.removeDialog();
+  //   this.modalService.fireUpdate({id : this.pinId, text : this.captionText, header: });
+  // }
 
-  remove() :void {
-    this.removeDialog()
-    this.modalService.fireUpdate({id : this.pinId, text : ' '});
-  }
+  // remove() :void {
+  //   this.removeDialog()
+  //   this.modalService.fireUpdate({id : this.pinId, text : ' '});
+  // }
 
   private removeDialog() : void {
     this.element.style.display = 'none';

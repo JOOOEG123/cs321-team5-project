@@ -1,15 +1,49 @@
-
-
-<div #imageel ></div>
+<div #imageel></div>
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">First modal</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="onClosedModal()">
+    <h4 class="modal-title pull-left">{{ modalHeader }} Pin</h4>
+    <button
+      type="button"
+      class="btn-close close pull-right"
+      aria-label="Close"
+      (click)="onClosedModal()"
+    >
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    This is a first modal<br />
+    <form [formGroup]="pinForm" class="row">
+      <div class="col-12 my-3">
+        <div class="form-floating">
+          <input
+            type="text"
+            formControlName="header"
+            class="form-control"
+            row="3"
+            placeholder="Header"
+            id="pin_desc"
+          />
+          <label for="pin_desc">Pin Header</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            formControlName="text"
+            style="height: 100px"
+            placeholder="Leave a comment here"
+            id="pin_desc"
+          ></textarea>
+          <label for="pin_desc">Pin Description</label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button">Cancel</button>
+    <button class="btn btn-success" type="button" (click)="save()">Save</button>
   </div>
 </ng-template>
