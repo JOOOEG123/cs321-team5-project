@@ -6,6 +6,7 @@ export class PinInformation {
 }
 export class Pin {
   text: string | undefined;
+  header: string | undefined;
   xcoords: number = 0;
   ycoords: number = 0;
   id!: string;
@@ -15,6 +16,7 @@ export class Pin {
 export class PinUpdate {
   id: string | undefined = undefined;
   text: string | undefined = undefined;
+  header: string | undefined = undefined;
 }
 
 export enum Direction {
@@ -28,3 +30,4 @@ export enum Size {
   Medium,
   Large,
 }
+

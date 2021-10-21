@@ -26,6 +26,8 @@ export class MapSelectComponent implements OnInit {
     pins: [],
   };
 
+
+
   constructor(
     private modalService: BsModalService,
     private userMapService: UserMapService,
