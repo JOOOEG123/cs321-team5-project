@@ -4,8 +4,8 @@
       class="col-12 col-sm-6 col-md-3"
       *ngFor="let map of maps; let i = index"
     >
-      <div class="card bg-white h-100 w-100 shadow rounded-lg">
-        <img [src]="map.imageUrl" class="card-img img-fluid boarder-0" alt="" width="100%" />
+      <div class="card bg-white h-100 w-100 shadow rounded-lg" >
+        <img [src]="map.imageUrl" class="card-img img-fluid boarder-0" alt="" width="100%" [routerLink]="['../map-view/', map.id]"/>
         <div class="card-body">
           <h5 class="card-title text-center">{{ map.name }}</h5>
           <p class="card-text text-center">{{ map.description }}</p>
