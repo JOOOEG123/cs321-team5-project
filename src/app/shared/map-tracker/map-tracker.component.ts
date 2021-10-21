@@ -1,15 +1,16 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ComponentFactoryResolver, ElementRef, EventEmitter, HostListener, Inject, Input, OnInit, Output, Renderer2, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostListener, Inject, Input, OnInit, Output, Renderer2, ViewContainerRef } from '@angular/core';
 import { uuidv4 } from '@core/helper';
+import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
 import { Subject } from 'rxjs';
 import { Direction, Pin, PinInformation, PinUpdate, Size } from './map-tracker.model';
 
-@Component({
+@Directive({
   selector: 'app-map-tracker',
-  templateUrl: './map-tracker.component.html',
-  styleUrls: ['./map-tracker.component.scss']
+
 })
+
 export class MapTrackerComponent implements OnInit {
 
   @Input()
@@ -22,23 +23,26 @@ export class MapTrackerComponent implements OnInit {
   private clickReceived : boolean = false;
   private currentId!: string;
   private updateSubject = new Subject<PinUpdate>();
+  cloudUrl: any;
 
   constructor(@Inject(DOCUMENT) private document: any,
               private el: ElementRef,
               private modalService: TrackImgService,
               private viewContainerRef: ViewContainerRef,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private renderer : Renderer2) { }
+              private renderer : Renderer2,
+              private cloudStorage: CloudStorageService) { }
 
   ngOnInit() {
     this.renderImage();
     this.renderPins();
   }
 
-  private renderImage() {
-
+  private async renderImage() {
+    this.cloudUrl = await this.cloudStorage.getImageFromRef(this.pinInformation.imageLocation).toPromise();
+    console.log(this.cloudUrl)
     this.renderer.setAttribute(this.el.nativeElement, 'style',
-      'position: relative;background-image: url(\'' + this.pinInformation.imageLocation + '\');' +
+      'position: relative;background-image: url(\'' + this.cloudUrl + '\');' +
       'background-size: ' + this.pinInformation.imageXSize + 'px ' + this.pinInformation.imageYSize + 'px;' +
       'width: ' + this.pinInformation.imageXSize + 'px;height : ' + this.pinInformation.imageYSize + 'px;');
   }
@@ -106,7 +110,7 @@ export class MapTrackerComponent implements OnInit {
   }
 
   private stylePin(nextPin: Pin) : string {
-    let style : string = 'background-image: url(\'./assets/marker.png\'); ' +
+    let style : string = 'background-image: url(\'^assets/images/dashboard/marker.png\'); ' +
       'cursor:grab;position:absolute;top:' + nextPin.ycoords + 'px;left:' + nextPin.xcoords + 'px;'
     switch (nextPin.size) {
       case Size.Large:
