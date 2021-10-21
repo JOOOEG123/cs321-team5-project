@@ -17,6 +17,7 @@ import { AuthErrorDisplayComponent } from './shared/auth-error-display/auth-erro
 import { SharedComponent } from './shared';
 import { MapViewComponent } from './pages/map-view/map-view.component';
 import { MapTrackerComponent } from './shared/map-tracker/map-tracker.component';
+import { AngularPinModule } from '@shared/lib/angular-pin.module';
 
 
 
@@ -30,6 +31,7 @@ import { MapTrackerComponent } from './shared/map-tracker/map-tracker.component'
   imports: [
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularPinModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
     AppRoutingModule,

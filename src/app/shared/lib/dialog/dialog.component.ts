@@ -1,21 +1,22 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { TrackImgService } from '@core/services/track-img/track-img.service';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ModalService} from "./dialog.service";
 
 @Component({
-  selector: 'app-pin-modal',
-  template: ``,
+  selector: 'jw-modal',
+  templateUrl: './dialog.component.html',
+  encapsulation: ViewEncapsulation.None,
 })
-export class PinModalComponent implements OnInit, OnDestroy {
+export class DialogComponent implements OnInit, OnDestroy {
 
   @Input()
   id!: string;
 
   @Input()
   captionText : string = '';
-  pinId : string | undefined = undefined;
+  pinId!: string;
   private readonly element: any;
 
-  constructor(private modalService: TrackImgService, private el: ElementRef) {
+  constructor(private modalService: ModalService, private el: ElementRef) {
     this.element = el.nativeElement;
   }
 
@@ -57,7 +58,7 @@ export class PinModalComponent implements OnInit, OnDestroy {
 
   remove() :void {
     this.removeDialog()
-    this.modalService.fireUpdate({id : this.pinId, text : ' '});
+    this.modalService.fireUpdate({id : this.pinId, text : undefined});
   }
 
   private removeDialog() : void {

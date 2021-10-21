@@ -1,25 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-.btn-login {
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  padding: 0.75rem 1rem;
-}
-
-.btn-google {
-  color: white !important;
-  background-color: #ea4335;
-}
-
-.btn-facebook {
-  color: white !important;
-  background-color: #3b5998;
-}
-
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
-
-
-/* You can add global styles to this file, and also import other style files */
 .popover-box {
   position: absolute;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -90,4 +69,3 @@ body.jw-modal-open {
   /* body overflow is hidden to hide main scrollbar when modal window is open */
   overflow: hidden;
 }
-

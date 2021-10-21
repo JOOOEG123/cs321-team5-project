@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DndMap } from '@core/models/auth/map.model';
 import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { UserMapService } from '@core/services/user-map/user-map.service';
+import { PinInformation } from '@shared/map-tracker/map-tracker.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddModalComponent } from './add-modal/add-modal.component';
 
@@ -16,6 +17,14 @@ export class MapSelectComponent implements OnInit {
   addMapModal?: BsModalRef;
   uid: string | undefined;
   userMaps: any;
+
+
+  pindata:PinInformation = {
+    imageLocation: 'R0kdawEbU1T4BAj1GbEnalSKXNy2/6jn0xdhitpa',
+    imageXSize: 600,
+    imageYSize: 900,
+    pins: [],
+  };
 
   constructor(
     private modalService: BsModalService,
