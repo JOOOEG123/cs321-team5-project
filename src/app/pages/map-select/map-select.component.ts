@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DndMap } from '@core/models/auth/map.model';
 import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { UserMapService } from '@core/services/user-map/user-map.service';
@@ -19,7 +20,7 @@ export class MapSelectComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private userMapService: UserMapService,
-    private cloudStorage: CloudStorageService
+    private cloudStorage: CloudStorageService,
   ) {
     this.userMapService.getAllUserMaps();
   }
@@ -29,16 +30,14 @@ export class MapSelectComponent implements OnInit {
       this.maps = userMap;
       this.getImages();
     });
-    this.newMap();
   }
 
-  clicked(map: DndMap) {
-    this.userMapService.updateUserMap(map);
-  }
-
+  /**
+   * gets images, should probably only do the new ones. Map images can not be edited
+   */
   getImages() {
     this.maps.forEach(map => {
-      if(map.imageRef) {
+      if(map.imageRef && !map.imageUrl) {
         this.cloudStorage.getImageFromRef(map.imageRef).subscribe(url => {
           map.imageUrl = url;
         })

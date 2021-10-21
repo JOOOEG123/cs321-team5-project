@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { NgxBootstrapModule } from '@core/modules/ngx-bootstrap/ngx-bootstrap.module';
 import { AuthErrorDisplayComponent } from './shared/auth-error-display/auth-error-display.component';
 import { SharedComponent } from './shared';
+import { MapViewComponent } from './pages/map-view/map-view.component';
 
 
 
@@ -23,7 +24,7 @@ import { SharedComponent } from './shared';
     AppComponent,
     ...AllLayoutComponents,
     ...PagesComponent,
-    ...SharedComponent
+    ...SharedComponent,
   ],
   imports: [
     AngularFireAuthModule,

@@ -9,6 +9,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { onlyAllowSeft, redirectLoggedInToByRoutes } from '../app-routing.pipe';
 import { MapSelectComponent } from './map-select/map-select.component';
 import { AddModalComponent } from './map-select/add-modal/add-modal.component';
+import { MapViewComponent } from './map-view/map-view.component';
 
 export const PagesComponent = [
   HomepageNoAuthComponent,
@@ -20,6 +21,7 @@ export const PagesComponent = [
   MapSelectComponent,
   AddModalComponent,
   UserProfileComponent,
+  MapViewComponent
 ];
 
 export const PagesRoutes: Routes = [
@@ -58,6 +60,19 @@ export const PagesRoutes: Routes = [
     canActivate: [AngularFireAuthGuard],
     component: MapSelectComponent,
     data: { title: 'Map Select' },
+  },
+  // probably should accept an id here. I'm concerned about sharing that link and editing others' maps
+  {
+    path: 'map-view',
+    canActivate: [AngularFireAuthGuard],
+    component: MapViewComponent,
+    data: { title: 'Map View' },
+  },
+  {
+    path: 'map-view/:id',
+    canActivate: [AngularFireAuthGuard],
+    component: MapViewComponent,
+    data: { title: 'Map View' },
   },
 
   // Routing for the AboutUsComponent.
