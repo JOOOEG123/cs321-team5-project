@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UserProfile } from '@core/models/auth/auth.model';
+import { AuthService } from '@core/services/auth/auth.service';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 import { Observable } from 'rxjs';
 
@@ -11,7 +12,18 @@ import { Observable } from 'rxjs';
   templateUrl: './user-nav-bar.component.html',
   styleUrls: ['./user-nav-bar.component.scss']
 })
-export class UserNavBarComponent implements OnInit {
+export class UserNavBarComponent implements OnInit{
+
+  uid: string | undefined;
+  constructor(private auth: AuthService, private authfire: AngularFireAuth) {}
+
+  ngOnInit() {
+    this.authfire.authState.subscribe((x) => {
+      this.uid = x?.uid
+    });
+  }
+
+  /*
   private _document!: AngularFirestoreDocument<UserProfile>;
   uid: string | undefined;
   profileInfo!: Observable<UserProfile | undefined>;
@@ -28,4 +40,5 @@ export class UserNavBarComponent implements OnInit {
       this.profileInfo = this._document.valueChanges();
     }
   }
+  */
 }
