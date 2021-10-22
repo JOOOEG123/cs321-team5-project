@@ -21,7 +21,8 @@ import { SharedComponent } from './shared';
     AppComponent,
     ...AllLayoutComponents,
     ...PagesComponent,
-    ...SharedComponent
+    ...SharedComponent,
+
   ],
   imports: [
     AngularFireAuthModule,

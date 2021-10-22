@@ -4,7 +4,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { UserProfile } from '@core/models/auth/auth.model';
+import { UserProfile } from '@core/models/auth.model';
 
 @Injectable({
   providedIn: 'root',

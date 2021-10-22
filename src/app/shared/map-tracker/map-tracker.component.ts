@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { uuidv4 } from '@core/helper';
 import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
-import { Direction, Pin, PinInformation, Size } from './map-tracker.model';
+import { Direction, Pin, PinInformation, Size } from '../../core/models/map-tracker.model';
 
 @Component({
   selector: 'app-map-tracker',

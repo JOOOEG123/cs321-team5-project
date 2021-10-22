@@ -12,6 +12,7 @@
 }
 
 .card:hover {
+  cursor: pointer;
   .card-img-overlay {
     opacity: 1;
   }
