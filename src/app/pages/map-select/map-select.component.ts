@@ -18,12 +18,10 @@ export class MapSelectComponent implements OnInit {
   uid: string | undefined;
   userMaps: any;
 
-
-
   constructor(
     private modalService: BsModalService,
     private userMapService: UserMapService,
-    private cloudStorage: CloudStorageService,
+    private cloudStorage: CloudStorageService
   ) {
     this.userMapService.getAllUserMaps();
   }

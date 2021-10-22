@@ -1,4 +1,5 @@
 import { Base } from './base.model';
+import { Pin } from './map-tracker.model';
 
 export class DndMap extends Base {
   name = '';
@@ -6,6 +7,6 @@ export class DndMap extends Base {
   imageUrl = '';
   resolX = 0;
   resolY = 0;
-  userPinId = '';
   imageRef = '';
+  pins: Pin[] = [];
 }
