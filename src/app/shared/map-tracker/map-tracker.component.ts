@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { uuidv4 } from '@core/helper';
-import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
 import { Direction, Pin, PinInformation, Size } from '../../core/models/map-tracker.model';
 
@@ -40,7 +39,6 @@ export class MapTrackerComponent implements AfterViewInit {
   constructor(
     private modalService: TrackImgService,
     private renderer: Renderer2,
-    private cloudStorage: CloudStorageService,
     private fb: FormBuilder
   ) {}
 
@@ -57,14 +55,11 @@ export class MapTrackerComponent implements AfterViewInit {
   }
 
   private async renderImage() {
-    this.cloudUrl = await this.cloudStorage
-      .getImageFromRef(this.pinInformation.imageLocation)
-      .toPromise();
     this.renderer.setAttribute(
       this.imageel.nativeElement,
       'style',
       "position: relative;background-image: url('" +
-        this.cloudUrl +
+      this.pinInformation.imageLocation +
         "');" +
         'background-size: ' +
         this.pinInformation.imageXSize +
@@ -112,7 +107,7 @@ export class MapTrackerComponent implements AfterViewInit {
 
   private stylePin(nextPin: Pin): string {
     let style: string =
-      "background-image: url('./assets/images/dashboard/marker.png'); " +
+      "background-image: url('./assets/images/dashboard/pins.png'); " +
       'cursor:grab;position:absolute;top:' +
       nextPin.ycoords +
       'px;left:' +

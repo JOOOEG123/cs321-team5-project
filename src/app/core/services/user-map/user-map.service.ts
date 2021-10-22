@@ -27,7 +27,7 @@ export class UserMapService {
     if (!mapObj.createdDate) {
       mapObj.createdDate = new Date().toString();
     }
-    if(!index) {
+    if(index !== undefined) {
       mapObj.uuid = user?.uid;
       mapObj.id =  uuidv4('user-map');
     }
@@ -36,7 +36,7 @@ export class UserMapService {
       const allUserMap = await this.getAllUserMaps();
       if (allUserMap?.user_maps && user) {
         const { user_maps } = allUserMap;
-        if (index && user_maps) {
+        if (index !== undefined && user_maps) {
           user_maps[index] = mapObj;
         } else if (user_maps) {
 
@@ -107,9 +107,9 @@ export class UserMapService {
     try {
       const allUserMap = await this.getAllUserMaps();
       if (allUserMap) {
-        const { user_map } = allUserMap;
-        if (user_map.length !== 0 && index) {
-          return user_map[index];
+        const { user_maps } = allUserMap;
+        if (user_maps.length !== 0 && index !== undefined) {
+          return user_maps[index];
         }
       }
       return {};
