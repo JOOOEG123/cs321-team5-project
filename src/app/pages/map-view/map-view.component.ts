@@ -1,10 +1,11 @@
+import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PinInformation } from '@core/models/map-tracker.model';
 import { DndMap } from '@core/models/map.model';
 import { UserMapService } from '@core/services/user-map/user-map.service';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map-view',
@@ -12,45 +13,43 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./map-view.component.scss'],
 })
 export class MapViewComponent implements OnInit, OnDestroy {
-  maps:DndMap[] = [];
+  map!: DndMap;
 
   sub!: Subscription;
 
-  pindata: PinInformation = {
-    imageLocation: 'R0kdawEbU1T4BAj1GbEnalSKXNy2/e1vnqcydorq',
-    imageXSize: 600,
-    imageYSize: 900,
-    pins: [
-      {
-        xcoords: 328,
-        ycoords: 322,
-        direction: 1,
-        size: 1,
-        header: 'New Pin',
-        text: 'fgfgfg',
-        id: 'tracker514526fb-8a8b-4910-9e4f-decfaf6cf03b',
-      },
-    ],
-  };
+  pindata!: PinInformation ;
   index!: number;
+  imgUrl: any;
 
   constructor(
     private mapService: UserMapService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private cloudst: CloudStorageService
   ) {}
   ngOnDestroy(): void {
     this.sub && this.sub.unsubscribe();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.index = Number(this.router.snapshot.paramMap.get('id'));
     if (this.index === NaN) return;
-    this.sub = this.mapService.userMap.subscribe((userMap:DndMap[]) => {
-      this.maps = userMap;
-      console.log(this.index)
-      console.log(this.maps[this.index]);
-    });
+    this.map = await this.mapService.getUserMapByIndex(this.index);
+    console.log(this.map);
+    this.imgUrl = await this.cloudst
+      .getImageFromRef(this.map.imageRef)
+      .toPromise();
+    console.log(this.imgUrl);
+    this.pindata = {
+      imageLocation: this.imgUrl,
+      imageXSize: 600,
+      imageYSize: 900,
+      pins: this.map.pins||[],
+    };
   }
 
-  onChanges(event: any) {}
+  onChanges(event: PinInformation) {
+    console.log('Saved ', event)
+    this.map.pins = event.pins;
+    this.mapService.updateUserMap(this.map, this.index);
+  }
 }
