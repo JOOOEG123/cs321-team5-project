@@ -1,12 +1,12 @@
-<div class="container-fluid">
-  <img class='img-fluid' [src]='map.imageUrl'>
+<div class="container-fluid" *ngIf="index">
+  <img class='img-fluid' [src]='maps[index].imageUrl'>
   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
     open off canvas
   </button>
   <!-- temp spacer because footer was overlapping and not allowing clicks -->
   <div style='margin: 500px'></div>
 
-  <app-map-tracker [(pinInformation)]="pindata"></app-map-tracker>
+  <app-map-tracker [(pinInformation)]="pindata" (pinInformationChange)="onChanges($event)" ></app-map-tracker>
 
 </div>
 
