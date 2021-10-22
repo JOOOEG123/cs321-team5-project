@@ -166,6 +166,7 @@ export class MapTrackerComponent implements AfterViewInit {
       this.pinForm.patchValue(pin);
       this.modalService.open(this.template);
     }
+    this.pinInformationChange.emit(this.pinInformation);
   }
 
   @HostListener('mousedown', ['$event'])
@@ -218,6 +219,7 @@ export class MapTrackerComponent implements AfterViewInit {
         );
       }
     }
+    this.pinInformationChange.emit(this.pinInformation);
   }
 
   save() {
