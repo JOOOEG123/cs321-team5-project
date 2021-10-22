@@ -18,15 +18,22 @@ export class MapSelectComponent implements OnInit {
   uid: string | undefined;
   userMaps: any;
 
-
-  pindata:PinInformation = {
-    imageLocation: 'R0kdawEbU1T4BAj1GbEnalSKXNy2/6jn0xdhitpa',
+  pindata: PinInformation = {
+    imageLocation: 'R0kdawEbU1T4BAj1GbEnalSKXNy2/e1vnqcydorq',
     imageXSize: 600,
     imageYSize: 900,
-    pins: [],
+    pins: [
+      {
+        xcoords: 328,
+        ycoords: 322,
+        direction: 1,
+        size: 1,
+        header: 'New Pin',
+        text: 'fgfgfg',
+        id: 'tracker514526fb-8a8b-4910-9e4f-decfaf6cf03b',
+      },
+    ],
   };
-
-
 
   constructor(
     private modalService: BsModalService,
@@ -47,19 +54,21 @@ export class MapSelectComponent implements OnInit {
    * gets images, should probably only do the new ones. Map images can not be edited
    */
   getImages() {
-    this.maps.forEach(map => {
-      if(map.imageRef && !map.imageUrl) {
-        this.cloudStorage.getImageFromRef(map.imageRef).subscribe(url => {
+    this.maps.forEach((map) => {
+      if (map.imageRef) {
+        this.cloudStorage.getImageFromRef(map.imageRef).subscribe((url) => {
           map.imageUrl = url;
-        })
+        });
       }
-    })
+    });
   }
 
   newMap() {
-    this.addMapModal = this.modalService.show(AddModalComponent, {class: 'modal-lg'});
+    this.addMapModal = this.modalService.show(AddModalComponent, {
+      class: 'modal-lg',
+    });
   }
-  deleteMap(index:number){
+  deleteMap(index: number) {
     this.userMapService.deleteUserMap(index);
   }
 }

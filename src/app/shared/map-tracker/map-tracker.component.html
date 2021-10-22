@@ -2,7 +2,7 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{ modalHeader }} Pin</h4>
+    <h4 class="modal-title pull-left">{{ modalHeader }} Pin </h4>
     <button
       type="button"
       class="btn-close close pull-right"
@@ -43,7 +43,8 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" type="button">Cancel</button>
+    <button class="btn btn-primary" type="button" (click)="delete()">Delete</button>
+    <button class="btn btn-primary" type="button" (click)="onClosedModal()">Cancel</button>
     <button class="btn btn-success" type="button" (click)="save()">Save</button>
   </div>
 </ng-template>
