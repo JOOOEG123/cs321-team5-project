@@ -13,11 +13,6 @@ export class Pin {
   direction: Direction = 0;
   size: Size = 0;
 }
-export class PinUpdate {
-  id: string | undefined = undefined;
-  text: string | undefined = undefined;
-  header: string | undefined = undefined;
-}
 
 export enum Direction {
   Up,
