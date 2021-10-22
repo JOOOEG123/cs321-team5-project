@@ -1,11 +1,20 @@
-<div class="container-fluid my-5">
+<div class="container-fluid">
   <div class="row">
     <div
-      class="col-12 col-sm-6 col-md-3"
+      class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3"
       *ngFor="let map of maps; let i = index"
     >
-      <div class="card bg-white h-100 w-100 shadow rounded-lg" >
-        <img [src]="map.imageUrl" class="card-img img-fluid boarder-0" alt="" width="100%" [routerLink]="['../map-view/', map.id]"/>
+      <div class="card bg-white shadow rounded-lg my-2 h-100">
+        <div class="card-img img-fluid text-center">
+          <img
+            [src]="map.imageUrl"
+            class="py-2"
+            alt=""
+            height="200"
+            width="270"
+            [routerLink]="['../map-view/', map.id]"
+          />
+        </div>
         <div class="card-body">
           <h5 class="card-title text-center">{{ map.name }}</h5>
           <p class="card-text text-center">{{ map.description }}</p>
@@ -15,9 +24,9 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-2 my-2">
       <div
-        class="card bg-dark text-white text-center rounded-lg shadow h-100"
+        class="card bg-dark text-white text-center rounded-lg shadow h-80"
         role="button"
         aria-label="Add new map"
         (click)="newMap()"
@@ -31,11 +40,3 @@
     </div>
   </div>
 </div>
-
-<p>Map (Component)</p>
-
-<app-map-tracker [(pinInformation)]="pindata"></app-map-tracker>
-
-<p>Map (directive)</p>
-
-<!-- <section app-map-tracker [(pinInformation)]="pindata"></section> -->

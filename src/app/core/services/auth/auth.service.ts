@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { AuthUser } from '@core/models/auth/auth.model';
+import { AuthUser } from '@core/models/auth.model';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 import { BehaviorSubject } from 'rxjs';
 
