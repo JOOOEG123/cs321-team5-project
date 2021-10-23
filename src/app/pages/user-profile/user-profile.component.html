@@ -1,6 +1,81 @@
 <div id="account-details" class="container-fluid">
   <div class="row my-auto" *ngIf="profileDetails | async as k">
-    <div class="col-12 text-center">
+
+    <!--Heading section w/ profile pic.-->
+    <div class="col-auto">
+      <img
+        src="assets/icons/profile/user.svg"
+        alt="profile image"
+        class="rounded-circle border shadow"
+        width="100"
+      />
+    </div>
+    <div class="col-sm-4">
+      <h1><br>Account Details</h1>
+    </div>
+
+    <!--Details section w/ all user information-->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-bg shadow-lg">
+          <div class="card-body px-4">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Username</h4>
+                <h6>{{k.userName}}</h6>
+              </div>
+              <div class="col-sm-6">
+                <h4>Email</h4>
+                <h6>{{k.email}}</h6>
+                <h6></h6>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>First Name</h4>
+                <h6>{{k.firstName}}</h6>
+              </div>
+              <div class="col-sm-6">
+                <h4>Last Name</h4>
+                <h6>{{k.lastName}}</h6>
+              </div>
+              <div class="col-sm-6">
+                <h4>Date of Birth</h4>
+                <h6>{{k.dob}}</h6>
+              </div>
+              <div class="col-sm-6">
+                <h4>Country</h4>
+                <h6>{{k.country}}</h6>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Account Created</h4>
+                <h6>{{k.createdt}}</h6>
+              </div>
+              <div class="col-sm-6">
+                <h4>Last Modified</h4>
+                <h6>{{k.moddt}}</h6>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--
+  <div class="col-12 text-center">
       <img
         src="assets/icons/profile/user.svg"
         alt="profile image"
@@ -50,5 +125,4 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+-->

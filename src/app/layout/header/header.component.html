@@ -9,7 +9,7 @@
   "
 >
 
-  <!--Button to toggle offcanvas-->
+  <!--Button to toggle offcanvas
   <button *ngIf="isLogIn" class="btn btn-primary-outline" type="button" data-bs-toggle="offcanvas"
   data-bs-target="#offcanvas" aria-controls="offcanvas">
   <img
@@ -20,6 +20,7 @@
   height="40"
   />
   </button>
+-->
 
   <div class="container">
     <a class="navbar-brand" [routerLink]="['hp', 'homepage']">
@@ -70,18 +71,15 @@
           >
         </li>
         <li>
-          <a
-            class="navbar-link"
-            [routerLink]="['profile', uid]"
-            *ngIf="isLogIn"
-          >
+          <button *ngIf="isLogIn" class="btn btn-primary-outline" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvas" aria-controls="offcanvas">
             <img
               src="assets/icons/profile/user.svg"
               alt="logo"
               class="rounded-circle border shadow"
               width="40"
             />
-          </a>
+          </button>
         </li>
         <li class="nav-item dropdown" *ngIf="!isLogIn">
           <a
