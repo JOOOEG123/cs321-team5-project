@@ -3,6 +3,7 @@
   filter: alpha(opacity=40);
   height: 100%;
   zoom: 1;
+  cursor: pointer;
 }
 
 .card-img-overlay {
@@ -12,7 +13,6 @@
 }
 
 .card:hover {
-  cursor: pointer;
   .card-img-overlay {
     opacity: 1;
   }

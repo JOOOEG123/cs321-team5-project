@@ -5,6 +5,7 @@ import { PinInformation } from '@core/models/map-tracker.model';
 import { DndMap } from '@core/models/map.model';
 import { UserMapService } from '@core/services/user-map/user-map.service';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-map-view',
@@ -22,13 +23,15 @@ export class MapViewComponent implements OnInit, OnDestroy {
   constructor(
     private mapService: UserMapService,
     private router: ActivatedRoute,
-    private cloudst: CloudStorageService
+    private cloudst: CloudStorageService,
+    private spinner: NgxSpinnerService
   ) {}
   ngOnDestroy(): void {
     this.sub && this.sub.unsubscribe();
   }
 
   async ngOnInit() {
+    this.spinner.show();
     this.index = Number(this.router.snapshot.paramMap.get('id'));
     if (this.index === NaN) return;
     this.map = await this.mapService.getUserMapByIndex(this.index);
@@ -36,6 +39,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.imgUrl = await this.cloudst
       .getImageFromRef(this.map.imageRef)
       .toPromise();
+
     console.log(this.imgUrl);
     this.pindata = {
       imageLocation: this.imgUrl,
@@ -43,6 +47,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
       imageYSize: 400,
       pins: this.map.pins || [],
     };
+   // await this.spinner.hide('TEST');
   }
 
   onChanges(event: PinInformation) {

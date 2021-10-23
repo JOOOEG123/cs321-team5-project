@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { NgxBootstrapModule } from '@core/modules/ngx-bootstrap/ngx-bootstrap.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AllLayoutComponents } from './layout';
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ import { SharedComponent } from './shared';
     FormsModule,
     HttpClientModule,
     NgxBootstrapModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
   ],
   providers: [],
