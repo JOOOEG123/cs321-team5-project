@@ -1,4 +1,12 @@
 <div class="container-fluid">
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="timer"
+    [fullScreen]="false"
+    ><p style="color: white">Loading maps...</p></ngx-spinner
+  >
   <div class="row">
     <div
       class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3"
@@ -24,9 +32,19 @@
             >
           </p>
           <p class="card-text">
-            <small class="text-muted">Last updated 3 mins ago</small>
+            <small class="text-muted">
+              Created: {{ map.createdDate | date: "medium" }}
+            </small>
+            <small class="text-muted text-nowrap">
+              Last updated: {{ map.modifiedDate | date: "medium" }}
+            </small>
           </p>
-          <button class="btn text-right" type="button" (click)="deleteMap(i)">
+          <p class="card-text"></p>
+          <button
+            class="btn text-right"
+            type="button"
+            (click)="openDetModal(deleteTemplate, i)"
+          >
             <img src="assets/icons/dashboard/delete.svg" alt="" width="30" />
           </button>
         </div>
@@ -48,3 +66,19 @@
     </div>
   </div>
 </div>
+
+<ng-template #deleteTemplate>
+  <div class="modal-body text-center">
+    <p>Do you want to delete the map?</p>
+    <button type="button" class="btn btn-danger mx-2" (click)="deleteMap()">
+      Yes
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mx-2"
+      (click)="modalRef?.hide()"
+    >
+      No
+    </button>
+  </div>
+</ng-template>

@@ -6,9 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NgxBootstrapModule } from '@core/modules/ngx-bootstrap/ngx-bootstrap.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AllLayoutComponents } from './layout';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { SharedComponent } from './shared';
     AngularFirestoreModule,
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     HttpClientModule,
@@ -39,6 +41,7 @@ import { SharedComponent } from './shared';
     NgxSpinnerModule,
     ReactiveFormsModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })

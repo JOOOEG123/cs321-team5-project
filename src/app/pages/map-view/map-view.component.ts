@@ -39,7 +39,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.imgUrl = await this.cloudst
       .getImageFromRef(this.map.imageRef)
       .toPromise();
-
+    await this.spinner.hide();
     console.log(this.imgUrl);
     this.pindata = {
       imageLocation: this.imgUrl,
@@ -47,12 +47,14 @@ export class MapViewComponent implements OnInit, OnDestroy {
       imageYSize: 400,
       pins: this.map.pins || [],
     };
-   // await this.spinner.hide('TEST');
   }
 
   onChanges(event: PinInformation) {
+    this.spinner.show();
     console.log('Saved ', event);
     this.map.pins = event.pins;
-    this.mapService.updateUserMap(this.map, this.index);
+    this.mapService.updateUserMap(this.map, this.index).finally(() => {
+      this.spinner.hide();
+    });
   }
 }
