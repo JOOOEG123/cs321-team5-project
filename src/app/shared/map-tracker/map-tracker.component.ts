@@ -12,7 +12,12 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { uuidv4 } from '@core/helper';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
-import { Direction, Pin, PinInformation, Size } from '../../core/models/map-tracker.model';
+import {
+  Direction,
+  Pin,
+  PinInformation,
+  Size,
+} from '../../core/models/map-tracker.model';
 
 @Component({
   selector: 'app-map-tracker',
@@ -59,7 +64,7 @@ export class MapTrackerComponent implements AfterViewInit {
       this.imageel.nativeElement,
       'style',
       "position: relative;background-image: url('" +
-      this.pinInformation.imageLocation +
+        this.pinInformation.imageLocation +
         "');" +
         'background-size: ' +
         this.pinInformation.imageXSize +
@@ -219,7 +224,6 @@ export class MapTrackerComponent implements AfterViewInit {
         );
       }
     }
-    this.pinInformationChange.emit(this.pinInformation);
   }
 
   save() {
@@ -239,7 +243,6 @@ export class MapTrackerComponent implements AfterViewInit {
     let popOverBox = element.getElementsByClassName('popover-box')[0];
     vm.renderer.setProperty(popOverBox, 'innerHTML', current.header);
     vm.pins.set(current.id, element);
-
     vm.hasSelected = false;
     vm.clickReceived = false;
     vm.currentId = '';
