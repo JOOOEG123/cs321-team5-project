@@ -10,6 +10,7 @@ import { onlyAllowSeft, redirectLoggedInToByRoutes } from '../app-routing.pipe';
 import { MapSelectComponent } from './map-select/map-select.component';
 import { AddModalComponent } from './map-select/add-modal/add-modal.component';
 import { MapViewComponent } from './map-view/map-view.component';
+import { SettingsComponent } from './settings/settings.component';
 
 export const PagesComponent = [
   HomepageNoAuthComponent,
@@ -20,8 +21,8 @@ export const PagesComponent = [
   AboutUsComponent,
   MapSelectComponent,
   AddModalComponent,
-  UserProfileComponent,
-  MapViewComponent
+  MapViewComponent,
+  SettingsComponent
 ];
 
 export const PagesRoutes: Routes = [
@@ -50,12 +51,6 @@ export const PagesRoutes: Routes = [
     data: { authGuardPipe: onlyAllowSeft, title: 'Profile' },
   },
   {
-    path: 'Account-Details',
-    canActivate: [AngularFireAuthGuard],
-    component: UserProfileComponent,
-    data: {title: 'Account Details' },
-  },
-  {
     path: 'map-select',
     canActivate: [AngularFireAuthGuard],
     component: MapSelectComponent,
@@ -82,4 +77,12 @@ export const PagesRoutes: Routes = [
     component: AboutUsComponent,
     data: {title: 'About Us'}
   },
+
+  //Routing for SettingsComponent
+  {
+    path: 'settings/:id',
+    canActivate: [AngularFireAuthGuard],
+    component: SettingsComponent,
+    data: {title: 'Settings'}
+  }
 ];
