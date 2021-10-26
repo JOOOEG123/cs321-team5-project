@@ -1,1 +1,43 @@
-<p>settings works!</p>
+<div id="account-details" class="container-fluid">
+  <div class="row my-auto" *ngIf="profileDetails | async as usr">
+
+    <!--Heading section w/ profile pic.-->
+    <div class="col-auto">
+      <img
+        src="assets/icons/profile/user.svg"
+        alt="profile image"
+        class="rounded-circle border shadow"
+        width="100"
+      />
+    </div>
+    <div class="col-sm-4">
+      <h1><br>Settings</h1>
+    </div>
+
+
+    <!--Main section of the page composed of a card and fields to change-->
+    <div class="row">
+      <h6 class="pt-4">Manage your user profile settings.</h6>
+
+      <div class="card card-bg shadow-lg">
+        <div class="card-body px-4">
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Account Details</h4>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Personal Details</h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
