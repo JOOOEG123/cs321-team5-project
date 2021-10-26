@@ -17,25 +17,113 @@
 
     <!--Main section of the page composed of a card and fields to change-->
     <div class="row">
-      <h6 class="pt-4">Manage your user profile settings.</h6>
+      <div class="col-sm-12 pt-4">
+        <h6 class="pt-4">Manage your user profile settings.</h6>
 
-      <div class="card card-bg shadow-lg">
-        <div class="card-body px-4">
+        <div class="card card-bg shadow-lg">
+          <div class="card-body px-4">
 
-          <div class="row">
-            <div class="col-sm-6">
-              <h4>Account Details</h4>
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Account Details</h4>
+              </div>
             </div>
-          </div>
 
-          <hr>
+            <!--Account Details Row-->
+            <div class="row">
 
-          <div class="row">
-            <div class="col-sm-6">
-              <h4>Personal Details</h4>
+              <div class="col-sm-6">
+                <h6>Current Username: {{usr.userName}}</h6>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label for="inputUserName" class="col-form-label">New Username: </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="username" id="inputUserName" class="form-control border-dark">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <h6>Current Email: {{usr.email}}</h6>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label for="inputEmail" class="col-form-label">New Email: </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="email" id="inputEmail" class="form-control border-dark">
+                  </div>
+                </div>
+              </div>
+
             </div>
-          </div>
 
+            <hr>
+
+            <!--Personal Details Row-->
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Personal Details</h4>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <h6>First Name: {{usr.firstName}}</h6>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label for="inputFirstName" class="col-form-label">New First Name: </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="firstName" id="inputFirstName" class="form-control border-dark">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <h6>Last Name: {{usr.lastName}}</h6>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label for="inputLastName" class="col-form-label">New Last Name: </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="lastName" id="inputLastName" class="form-control border-dark">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row pt-4">
+
+              <div class="col-sm-6">
+                <h6>Country: {{usr.country}}</h6>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label for="inputCountry" class="col-form-label">New Country: </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="country" id="inputCountry" class="form-control border-dark">
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <h6>Birthday: {{usr.dob}}</h6>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <label for="inputBirthday" class="col-form-label">New Birthday: </label>
+                  </div>
+                  <div class="col-auto">
+                    <input type="birthday" id="inputBirthday" class="form-control border-dark">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
