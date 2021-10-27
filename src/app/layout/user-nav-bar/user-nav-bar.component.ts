@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '@core/services/auth/auth.service';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
-import { UserProfile } from '@core/models/auth/auth.model';
-import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
-import { Observable } from 'rxjs';
 
-// Copied what was in the UserProfileComponent to get the name from the database.
+// Copied what was in the header to get the uid and make sign out link work.
 @Component({
   selector: 'app-user-nav-bar',
   templateUrl: './user-nav-bar.component.html',
@@ -16,6 +12,7 @@ export class UserNavBarComponent implements OnInit{
 
   isLogin = false;
   uid: string | undefined;
+
   constructor(private auth: AuthService, private authfire: AngularFireAuth) {}
 
   ngOnInit() {

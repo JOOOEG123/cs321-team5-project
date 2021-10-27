@@ -1,5 +1,5 @@
 <div id="account-details" class="container-fluid">
-  <div class="row my-auto" *ngIf="profileDetails | async as usr">
+  <div class="row my-auto">
 
     <!--Heading section w/ profile pic.-->
     <div class="col-auto">
@@ -13,7 +13,6 @@
     <div class="col-sm-4">
       <h1><br>Settings</h1>
     </div>
-
 
     <!--Main section of the page composed of a card and fields to change-->
     <div class="row">
@@ -33,7 +32,7 @@
             <div class="row">
 
               <div class="col-sm-6">
-                <h6>Current Username: {{usr.userName}}</h6>
+                <h6>Current Username: {{userProfile.userName}}</h6>
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <label for="inputUserName" class="col-form-label">New Username: </label>
@@ -45,7 +44,7 @@
               </div>
 
               <div class="col-sm-6">
-                <h6>Current Email: {{usr.email}}</h6>
+                <h6>Current Email: {{userProfile.email}}</h6>
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <label for="inputEmail" class="col-form-label">New Email: </label>
@@ -70,7 +69,7 @@
             <div class="row">
 
               <div class="col-sm-6">
-                <h6>First Name: {{usr.firstName}}</h6>
+                <h6>First Name: {{userProfile.firstName}}</h6>
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <label for="inputFirstName" class="col-form-label">New First Name: </label>
@@ -82,7 +81,7 @@
               </div>
 
               <div class="col-sm-6">
-                <h6>Last Name: {{usr.lastName}}</h6>
+                <h6>Last Name: {{userProfile.lastName}}</h6>
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <label for="inputLastName" class="col-form-label">New Last Name: </label>
@@ -98,7 +97,7 @@
             <div class="row pt-4">
 
               <div class="col-sm-6">
-                <h6>Country: {{usr.country}}</h6>
+                <h6>Country: {{userProfile.country}}</h6>
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <label for="inputCountry" class="col-form-label">New Country: </label>
@@ -110,7 +109,7 @@
               </div>
 
               <div class="col-sm-6">
-                <h6>Birthday: {{usr.dob}}</h6>
+                <h6>Birthday: {{userProfile.dob}}</h6>
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <label for="inputBirthday" class="col-form-label">New Birthday: </label>
@@ -127,5 +126,8 @@
         </div>
       </div>
     </div>
+
+
+
   </div>
 </div>
