@@ -27,11 +27,11 @@
 
     <!--Tab list w/ links to each window-->
     <div class="list-group-flush pt-2">
-      <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark"
-       type="button" data-bs-dismiss="offcanvas" aria-current="true">My Account
-      </a>
       <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark"
        type="button" data-bs-dismiss="offcanvas">My Maps
+      </a>
+      <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark"
+       type="button" data-bs-dismiss="offcanvas" aria-current="true">My Account
       </a>
       <a [routerLink]="['settings', uid]" class="list-group-item list-group-item-action bg-dark"
        type="button" data-bs-dismiss="offcanvas">Account Settings

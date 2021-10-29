@@ -12,8 +12,14 @@ import { Observable } from 'rxjs';
 })
 export class SettingsComponent implements OnInit {
 
+  //Holds the document that has the user profile settings.
   private document!: AngularFirestoreDocument<UserProfile>;
+
+  //User id string.
   uid: string | undefined;
+
+  //Holds an observable of the user profile details.
+  //Used to get a UserProfile struct with all the details that can be edited.
   profileDetails!: Observable<UserProfile | undefined>;
 
   //Interface object that will be used to hold the modified data.
@@ -38,7 +44,7 @@ export class SettingsComponent implements OnInit {
     this.uid = (await this.auth.currentUser)?.uid;
     if (this.uid !== undefined) {
       this.document = this.dataStorage.getProfileDetails(this.uid);
-      this.profileDetails = this.document.valueChanges();
+      this.profileDetails = this.document.valueChanges();             //Gets the profile details struct.
 
       //Subscribe to the component to get the data and store it locally in userProfile.
       this.profileDetails.subscribe(profile => {
@@ -49,6 +55,7 @@ export class SettingsComponent implements OnInit {
   }
 
   //Runs updateProfileDetails with the new data after the user clicks submit.
+  //Updates the user data in the database.
   onSubmit(): void {
     this.dataStorage.updateProfileDetails(this.userProfile);
   }
