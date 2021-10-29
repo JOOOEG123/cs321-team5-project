@@ -45,12 +45,10 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.index = Number(this.router.snapshot.paramMap.get('id'));
     if (this.index === NaN) return;
     this.map = await this.mapService.getUserMapByIndex(this.index);
-    console.log(this.map);
     this.imgUrl = await this.cloudst
       .getImageFromRef(this.map.imageRef)
       .toPromise();
     await this.spinner.hide();
-    console.log(this.imgUrl, this.map);
     this.pindata = {
       imageLocation: this.imgUrl,
       imageXSize: this.map.resolX || 500,

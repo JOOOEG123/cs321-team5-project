@@ -142,7 +142,6 @@ export class MapTrackerComponent implements AfterViewInit {
 
   @HostListener('click', ['$event'])
   onClick(event: any) {
-    console.log('click');
     let targetElement = event.target;
     if (event.target.classList.contains('popover-box')) {
       targetElement = targetElement.parentNode;
@@ -152,7 +151,6 @@ export class MapTrackerComponent implements AfterViewInit {
     if (!this.template) return;
     if (this.pins.has(id) && !this.hasSelected) {
       this.clickReceived = true;
-      console.log('run');
       let pin: Pin | any = this.pinInformation.pins.find(
         (item) => item.id === id
       );
@@ -160,8 +158,6 @@ export class MapTrackerComponent implements AfterViewInit {
         (item) => item.id === id
       );
       this.modalHeader = 'Edit';
-
-      console.log(pin);
       this.pinForm.patchValue(pin);
       this.modalService.open(this.template);
     } else if (!this.pins.has(id) && !this.hasSelected) {

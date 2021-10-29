@@ -29,7 +29,6 @@ export class CloudStorageService {
     const task = ref.put(file);
     task.percentageChanges().subscribe(percent => {
       this.uploadProgress = percent;
-      console.log(percent)
     });
     await task;
     return `${user?.uid}/${randomId}`;
