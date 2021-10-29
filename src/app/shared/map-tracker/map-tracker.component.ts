@@ -48,6 +48,14 @@ export class MapTrackerComponent implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
+    this.renderAll();
+  }
+
+  renderAll(pinInformation?:PinInformation | undefined, render?:any) {
+    if(pinInformation) {
+      this.renderer = render;
+      this.pinInformation = pinInformation;
+    }
     this.renderImage();
     this.renderPins();
   }

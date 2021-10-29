@@ -15,13 +15,21 @@
     </div>
     <div class="card-body">
       <div class="row m-2">
+        <div class="col-12 mb-2">
+          <div class="btn-group" role="group" aria-label="Image size button">
+            <button type="button" class="btn btn-primary" (click)="onChangeImageSize('small')">Small Size</button>
+            <button type="button" class="btn btn-primary" (click)="onChangeImageSize('medium')">Medium Size</button>
+            <button type="button" class="btn btn-primary" (click)="onChangeImageSize('large')">Large Size</button>
+          </div>
+        </div>
         <div class="col-12 col-md-6 border-end">
           <div class="row">
             <app-map-tracker
               class="col-auto border rounded-lg m-0 p-0"
               *ngIf="pindata"
-              [(pinInformation)]="pindata"
+              [pinInformation]="pindata"
               (pinInformationChange)="onChanges($event)"
+              #imagePin
             ></app-map-tracker>
           </div>
         </div>

@@ -1,48 +1,53 @@
 <div class="modal-header">
   <h4 class="modal-title pull-left">Add New Map</h4>
-  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+  <button
+    type="button"
+    class="btn-close close pull-right"
+    aria-label="Close"
+    (click)="modalRef?.hide()"
+  >
     <span aria-hidden="true" class="visually-hidden">&times;</span>
   </button>
 </div>
 <div class="modal-body container">
-  <form [formGroup]="addMapForm" (ngSubmit)="addMap()" class='row'>
-    <div class='col input-group mb-3'>
-      <button
-      class='card-img-top'
-      (click)='fileInput.click()'
-      (dragover)='test()'
-      (drop)='test2()'
-      *ngIf='!fakeImg'>
-      Add Image
-      </button>
+  <form [formGroup]="addMapForm" (ngSubmit)="addMap()" class="row">
+    <div class="col input-group mb-3">
+      <div
+        class="border border-danger h-100 w-100 text-center rounded-3 shadow"
+        role="button"
+        (click)="fileInput.click()"
+        (drop)="test2()"
+        *ngIf="!fakeImg"
+      >
+        <span class="text-muted display-6">Click to Add Image</span>
+      </div>
 
       <!-- ImageAcceptor -->
       <input
-      type='file'
-      accept='image/*'
-      (change)='processImage($event)'
-      hidden
-      #fileInput
-      >
+        type="file"
+        accept="image/*"
+        (change)="processImage($event)"
+        hidden
+        #fileInput
+      />
       <!-- ImageAcceptor /-->
-      <small
-        [id]="'imageUrl' + '-error'"
-        class="invalid-feedback"
-      >
+      <small [id]="'imageUrl' + '-error'" class="invalid-feedback">
         image is required
       </small>
       <!-- <img *ngIf='!showImageAdd' style='width: 100%' [src]='addMapForm.controls.imageUrl.value'> -->
-      <img *ngIf='fakeImg' style='width: 100%' [src]='fakeImg'>
-    </div>
-    <div class='col'>
       <div
-        class="form-floating mb-3"
-        *ngFor="let formControl of formConst"
+        *ngIf="fakeImg"
+        class="border border-success h-100 w-100 text-center rounded-3 shadow"
       >
+        <img class="h-100 w-100 p-1" [src]="fakeImg" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-floating mb-3" *ngFor="let formControl of formConst">
         <input
           type="text"
           class="form-control"
-          *ngIf='formControl.type === "text"'
+          *ngIf="formControl.type === 'text'"
           [id]="formControl.formControl + '-regist'"
           [formControlName]="formControl.formControl"
           [placeholder]="formControl.placeholder"
@@ -53,7 +58,10 @@
           }"
           [attr.aria-describedby]="formControl.formControl + '-error'"
         />
-        <label *ngIf='formControl.type === "text"' [for]="formControl.formControl + '-regist'">
+        <label
+          *ngIf="formControl.type === 'text'"
+          [for]="formControl.formControl + '-regist'"
+        >
           {{ formControl.placeholder }}
         </label>
 
@@ -66,14 +74,9 @@
       </div>
     </div>
 
-
     <div class="d-grid mb-2">
       <button
-        class="
-          btn btn-lg btn-primary btn-login
-          fw-bold
-          text-uppercase
-        "
+        class="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
         [disabled]="addMapForm.invalid"
         type="submit"
       >
