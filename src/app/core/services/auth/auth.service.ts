@@ -74,7 +74,7 @@ export class AuthService {
     const token = await user?.getIdTokenResult();
     if (token) {
       this._authState.next(true);
-      this.router.navigate(['hp', 'profile', user?.uid]);
+      this.router.navigate(['hp', 'map-select']);   //['hp', 'profile', user?.uid]
     }
   }
 
