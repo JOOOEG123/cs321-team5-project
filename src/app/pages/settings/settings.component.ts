@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
-import { UserProfile } from '@core/models/auth/auth.model';
+import { UserProfile } from '@core/models/auth.model';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/app';
