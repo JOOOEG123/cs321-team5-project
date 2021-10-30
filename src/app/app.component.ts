@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '@core/services/auth/auth.service';
 import { filter, map } from 'rxjs/operators';
 
 @Component({

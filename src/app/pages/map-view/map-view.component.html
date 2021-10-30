@@ -1,21 +1,76 @@
-<div>
-  <img class='img-fluid' [src]='map.imageUrl'>
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    open off canvas
-  </button>
-  <!-- temp spacer because footer was overlapping and not allowing clicks -->
-  <div style='margin: 500px'></div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-spin"
+  [fullScreen]="false"
+  ><p style="color: white">Featching map...</p></ngx-spinner
+>
 
+<div class="container-fluid w-100" *ngIf="index !== undefined && map">
+  <!-- temp spacer because footer was overlapping and not allowing clicks -->
+  <div class="card w-100">
+    <div class="card-header bg-transparent">
+      <h5 class="card-title">{{ map.name }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row m-2">
+        <div class="col-12 mb-2">
+          <div class="btn-group" role="group" aria-label="Image size button">
+            <button type="button" class="btn btn-primary" (click)="onChangeImageSize('small')">Small Size</button>
+            <button type="button" class="btn btn-primary" (click)="onChangeImageSize('medium')">Medium Size</button>
+            <button type="button" class="btn btn-primary" (click)="onChangeImageSize('large')">Large Size</button>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 border-end">
+          <div class="row">
+            <app-map-tracker
+              class="col-auto border rounded-lg m-0 p-0"
+              *ngIf="pindata"
+              [pinInformation]="pindata"
+              (pinInformationChange)="onChanges($event)"
+              #imagePin
+            ></app-map-tracker>
+          </div>
+        </div>
+        <div class="col-12 col-md-6"></div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        class="btn btn-success"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample"
+      >
+        Show Map Details
+      </button>
+    </div>
+  </div>
 </div>
 
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<div
+  *ngIf="map"
+  class="offcanvas offcanvas-end"
+  data-bs-scroll="true"
+  data-bs-backdrop="false"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">TITLE</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{ map.name }}</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
   </div>
   <div class="offcanvas-body">
     <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      {{ map.description }}
     </div>
   </div>
 </div>

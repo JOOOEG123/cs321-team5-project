@@ -1,23 +1,58 @@
-<div class="container-fluid my-5">
+<div class="container-fluid">
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="timer"
+    [fullScreen]="false"
+    ><p style="color: white">Loading maps...</p></ngx-spinner
+  >
   <div class="row">
     <div
-      class="col-12 col-sm-6 col-md-3"
+      class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3"
       *ngFor="let map of maps; let i = index"
     >
-      <div class="card bg-white h-100 w-100 shadow rounded-lg" >
-        <img [src]="map.imageUrl" class="card-img img-fluid boarder-0" alt="" width="100%" [routerLink]="['../map-view/', map.id]"/>
+      <div class="card bg-white shadow rounded-lg my-2 h-100">
+        <div class="card-img img-fluid text-center">
+          <img
+            [src]="map.imageUrl"
+            class="py-2"
+            alt=""
+            height="200"
+            width="270"
+            [routerLink]="['../map-view/', i]"
+          />
+        </div>
         <div class="card-body">
           <h5 class="card-title text-center">{{ map.name }}</h5>
-          <p class="card-text text-center">{{ map.description }}</p>
-          <button class="btn text-right" type="button" (click)="deleteMap(i)">
+          <p class="card-text text-center">
+            {{ map.description | slice: 0:100
+            }}<span *ngIf="map.description.length >= 100 && map.description"
+              >...</span
+            >
+          </p>
+          <p class="card-text">
+            <small class="text-muted">
+              Created: {{ map.createdDate | date: "medium" }}
+            </small>
+            <small class="text-muted text-nowrap">
+              Last updated: {{ map.modifiedDate | date: "medium" }}
+            </small>
+          </p>
+          <p class="card-text"></p>
+          <button
+            class="btn text-right"
+            type="button"
+            (click)="openDetModal(deleteTemplate, i)"
+          >
             <img src="assets/icons/dashboard/delete.svg" alt="" width="30" />
           </button>
         </div>
       </div>
     </div>
-    <div class="col-12 col-sm-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3 col-lg-2 my-2">
       <div
-        class="card bg-dark text-white text-center rounded-lg shadow h-100"
+        class="card bg-dark text-white text-center rounded-lg shadow h-80"
         role="button"
         aria-label="Add new map"
         (click)="newMap()"
@@ -31,3 +66,19 @@
     </div>
   </div>
 </div>
+
+<ng-template #deleteTemplate>
+  <div class="modal-body text-center">
+    <p>Do you want to delete the map?</p>
+    <button type="button" class="btn btn-danger mx-2" (click)="deleteMap()">
+      Yes
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary mx-2"
+      (click)="modalRef?.hide()"
+    >
+      No
+    </button>
+  </div>
+</ng-template>

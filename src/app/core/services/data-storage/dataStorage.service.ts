@@ -4,7 +4,8 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import { UserProfile } from '@core/models/auth/auth.model';
+import { UserProfile } from '@core/models/auth.model';
+import { Pin } from '@core/models/map-tracker.model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,7 +53,28 @@ export class DataStorageService {
     }
   }
 
+  addUserPins(pins: Pin[], uid: string | undefined, mapId: string | undefined) {
+    try {
+      return this.fireStore
+        .doc<any>(`${mapId}/${uid}`)
+        .set({ user_pins: pins });
+    } catch (error) {
+      throw error;
+    }
+  }
+  removeUserPins(uid: string | undefined, mapId: string | undefined) {
+    try {
+      return this.fireStore.doc<any>(`user_pins/${uid}`)
+    } catch (error) {
+      throw error;
+    }
+  }
+
   getUserMap(id: string | undefined) {
     return this.getDocFunc(id).get();
+  }
+
+  getUserPin(uid: string | undefined, mapId: string | undefined) {
+    return this.fireStore.doc<any>(`user_pins/${mapId}/${uid}`).get()
   }
 }

@@ -1,49 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DndMap } from '@core/models/auth/map.model';
+import { CloudStorageService } from '@core/services/cloud-storage/cloud-storage.service';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PinInformation } from '@core/models/map-tracker.model';
+import { DndMap } from '@core/models/map.model';
 import { UserMapService } from '@core/services/user-map/user-map.service';
-import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { MapTrackerComponent } from '@shared/map-tracker/map-tracker.component';
 
 @Component({
   selector: 'app-map-view',
   templateUrl: './map-view.component.html',
-  styleUrls: ['./map-view.component.scss']
+  styleUrls: ['./map-view.component.scss'],
 })
-export class MapViewComponent implements OnInit {
+export class MapViewComponent implements OnInit, OnDestroy {
+  map!: DndMap;
+  sub!: Subscription;
 
-  map= {
-    imageUrl: '../../../assets/images/dashboard/newmap.jpg',
-  } as DndMap;
+  pindata!: PinInformation;
+  index!: number;
+  imgUrl: any;
+
+  @ViewChild('imagePin') imagePin!: MapTrackerComponent;
 
   constructor(
     private mapService: UserMapService,
     private router: ActivatedRoute,
-  ) { }
-
-  ngOnInit(): void {
-    this.router.params.pipe(take(1)).subscribe(params => {
-      if(params.id) {
-        this.getMap(params.id).then(map => {
-          if(map) {
-            this.map = map;
-          }
-        });
-      }
-    })
+    private cloudst: CloudStorageService,
+    private spinner: NgxSpinnerService,
+    private renderer: Renderer2
+  ) {}
+  ngOnDestroy(): void {
+    this.sub && this.sub.unsubscribe();
   }
 
-  async getMap(id: string) {
-    try {
-      const allUserMap = await this.mapService.getAllUserMaps();
-      if (allUserMap) {
-        const { user_maps } = allUserMap;
-        return user_maps.find((map:DndMap) => map.id === id) as DndMap;
-      }
-      return null;
-    } catch (error) {
-      console.error(error);
-      return null;
+  async ngOnInit() {
+    this.spinner.show();
+    this.index = Number(this.router.snapshot.paramMap.get('id'));
+    if (this.index === NaN) return;
+    this.map = await this.mapService.getUserMapByIndex(this.index);
+    this.imgUrl = await this.cloudst
+      .getImageFromRef(this.map.imageRef)
+      .toPromise();
+    await this.spinner.hide();
+    this.pindata = {
+      imageLocation: this.imgUrl,
+      imageXSize: this.map.resolX || 500,
+      imageYSize: this.map.resolY || 400,
+      pins: this.map.pins || [],
+    };
+  }
+
+  onChangeImageSize(size: string) {
+    switch (size) {
+      case 'small':
+        this.pindata.imageXSize = 500;
+        this.pindata.imageYSize = 400;
+        break;
+      case 'medium':
+        this.pindata.imageXSize = 800;
+        this.pindata.imageYSize = 700;
+        break;
+      default:
+        this.pindata.imageXSize = 1024;
+        this.pindata.imageYSize = 974;
+        break;
     }
+    this.imagePin.renderAll(this.pindata, this.renderer);
+    this.onChanges(this.pindata);
   }
 
+  onChanges(event: PinInformation) {
+    this.spinner.show();
+    this.map.pins = event.pins;
+    this.map.resolX = event.imageXSize;
+    this.map.resolY = event.imageYSize;
+    this.mapService.updateUserMap(this.map, this.index).finally(() => {
+      this.spinner.hide();
+    });
+  }
 }
