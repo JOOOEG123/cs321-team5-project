@@ -4,8 +4,7 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UserProfile } from '@core/models/auth/auth.model';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 import { Observable } from 'rxjs';
-import { AuthUser } from '@core/models/auth/auth.model';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 
 @Component({
   selector: 'app-settings',
@@ -21,7 +20,11 @@ export class SettingsComponent implements OnInit {
   uid: string | undefined;
 
   //Holds the email address before changes.
-  private emailAddr: string | undefined;
+  private prevEmail: string | undefined;
+
+  //Used to notify the user of the success or failure of changing email.
+  title: string | undefined;
+  message: string | undefined;
 
   //Holds an observable of the user profile details.
   //Used to get a UserProfile struct with all the details that can be edited.
@@ -56,17 +59,30 @@ export class SettingsComponent implements OnInit {
       this.profileDetails.subscribe(profile => {
         if(profile != undefined)
           this.userProfile = profile;
+
+          if(profile?.email != null)
+            this.prevEmail = profile.email;
       })
     }
   }
 
   //Runs updateProfileDetails with the new data after the user clicks submit.
-  //Updates the user data in the database.
-  onSubmit(): void {
-    if(this.userProfile.email != null)
-      firebase.default.auth().currentUser?.updateEmail(this.userProfile.email);
+  //Updates the user data in the database and the login email in the authentication section.
+  onSubmit(): void
+  {
+    //Makes sure email is only changed if the email field input is not null and isn't the same as the last email.
+    if(this.userProfile.email != null) {
+      firebase.auth().currentUser?.updateEmail(this.userProfile.email).then(() =>
+        {
+          this.title = "Changes Successful.";
+          this.message = "Your changes have been saved. Please check your \"Account Details\" page to see the reflected changes.";
 
-    this.dataStorage.updateProfileDetails(this.userProfile);
+          //Changes made only if the email was properly updated.
+          this.dataStorage.updateProfileDetails(this.userProfile);
+        }).catch((error) => {
+          this.title = "Unable to Save Changes.";
+          this.message = "Please sign-in again to save changes";
+        });
+    }
   }
-
 }
