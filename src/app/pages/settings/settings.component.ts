@@ -4,6 +4,8 @@ import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UserProfile } from '@core/models/auth/auth.model';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
 import { Observable } from 'rxjs';
+import { AuthUser } from '@core/models/auth/auth.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-settings',
@@ -17,6 +19,9 @@ export class SettingsComponent implements OnInit {
 
   //User id string.
   uid: string | undefined;
+
+  //Holds the email address before changes.
+  private emailAddr: string | undefined;
 
   //Holds an observable of the user profile details.
   //Used to get a UserProfile struct with all the details that can be edited.
@@ -47,6 +52,7 @@ export class SettingsComponent implements OnInit {
       this.profileDetails = this.document.valueChanges();             //Gets the profile details struct.
 
       //Subscribe to the component to get the data and store it locally in userProfile.
+      //Saves the previous email address for later use.
       this.profileDetails.subscribe(profile => {
         if(profile != undefined)
           this.userProfile = profile;
@@ -57,6 +63,9 @@ export class SettingsComponent implements OnInit {
   //Runs updateProfileDetails with the new data after the user clicks submit.
   //Updates the user data in the database.
   onSubmit(): void {
+    if(this.userProfile.email != null)
+      firebase.default.auth().currentUser?.updateEmail(this.userProfile.email);
+
     this.dataStorage.updateProfileDetails(this.userProfile);
   }
 
