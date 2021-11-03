@@ -4,10 +4,17 @@
 
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasWithBackdropLabel">
-      Menu
+      Main Menu
     </h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+
+  <div class="list-group-flush px-0">
+    <a class="list-group-item list-group-item-action bg-dark ps-3"
+     type="button" data-bs-dismiss="offcanvas" (click)="signOut()" *ngIf="isLogin">Sign Out
+  </a>
+  </div>
+
   <hr>
 
   <div class="offcanvas-body">
@@ -20,11 +27,15 @@
 
     <!--Tab list w/ links to each window-->
     <div class="list-group-flush pt-2">
-      <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark" aria-current="true">
-        My Account
+      <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark"
+       type="button" data-bs-dismiss="offcanvas">My Maps
       </a>
-      <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark">My Maps</a>
-      <a href="#" class="list-group-item list-group-item-action bg-dark">Account Settings</a>
+      <a [routerLink]="['profile', uid]" class="list-group-item list-group-item-action bg-dark"
+       type="button" data-bs-dismiss="offcanvas" aria-current="true">My Account
+      </a>
+      <a [routerLink]="['settings', uid]" class="list-group-item list-group-item-action bg-dark"
+       type="button" data-bs-dismiss="offcanvas">Account Settings
+      </a>
     </div>
   </div>
 </div>

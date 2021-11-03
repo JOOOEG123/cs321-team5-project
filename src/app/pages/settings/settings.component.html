@@ -1,0 +1,199 @@
+<div id="account-details" class="container-fluid">
+  <div class="row my-auto">
+    <!--Heading section w/ profile pic.-->
+    <div class="col-auto">
+      <img
+        src="assets/icons/profile/user.svg"
+        alt="profile image"
+        class="rounded-circle border shadow"
+        width="100"
+      />
+    </div>
+    <div class="col-sm-4">
+      <h1><br />Settings</h1>
+    </div>
+
+    <!--Main section of the page composed of a card and fields to change-->
+    <div class="row">
+      <div class="col-sm-12 pt-1">
+        <h6 class="pt-4">Manage your user profile settings.</h6>
+
+        <form (ngSubmit)="onSubmit()">
+          <div class="card card-bg shadow-lg">
+            <div class="card-body px-4">
+              <!--Account Details Row-->
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>Account Details</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label for="inputUserName" class="col-form-label pt-3"
+                        ><h5>Username:</h5></label
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <input
+                        type="username"
+                        name="username"
+                        id="inputUserName"
+                        class="form-control border-dark"
+                        [(ngModel)]="userProfile.userName"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label for="inputEmail" class="col-form-label pt-3"
+                        ><h5>Email:</h5></label
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <input
+                        type="email"
+                        name="email"
+                        id="inputEmail"
+                        class="form-control border-dark"
+                        [(ngModel)]="userProfile.email"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr />
+
+              <!--Personal Details Row-->
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>Personal Details</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label for="inputFirstName" class="col-form-label pt-3"
+                        ><h5>First Name:</h5></label
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <input
+                        type="firstName"
+                        name="firstname"
+                        id="inputFirstName"
+                        class="form-control border-dark"
+                        [(ngModel)]="userProfile.firstName"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label for="inputLastName" class="col-form-label pt-3"
+                        ><h5>Last Name:</h5></label
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <input
+                        type="lastName"
+                        name="lastname"
+                        id="inputLastName"
+                        class="form-control border-dark"
+                        [(ngModel)]="userProfile.lastName"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row pt-4">
+                <div class="col-sm-6">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label for="inputCountry" class="col-form-label pt-3"
+                        ><h5>Country:</h5></label
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <input
+                        type="country"
+                        name="country"
+                        id="inputCountry"
+                        class="form-control border-dark"
+                        [(ngModel)]="userProfile.country"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <label for="inputBirthday" class="col-form-label pt-3"
+                        ><h5>Birthday:</h5></label
+                      >
+                    </div>
+                    <div class="col-auto">
+                      <input
+                        type="birthday"
+                        name="birthday"
+                        id="inputBirthday"
+                        class="form-control border-dark"
+                        [(ngModel)]="userProfile.dob"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Button saves changes and displays a dialog on success-->
+          <div class="d-grid gap-2 d-md-block pt-4">
+            <button
+              type="submit"
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#confirmMessage"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+
+        <div
+          class="modal fade"
+          id="confirmMessage"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="confirmationMessage"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="confirmationMessage">
+                  {{ title }}
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <p class="text-center">{{ message }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
