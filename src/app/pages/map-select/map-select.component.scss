@@ -11,8 +11,13 @@
   transition: 0.5s ease;
   opacity: 0.5;
 }
+.card {
+  top: 0;
+  transition: top ease 0.5s;
+}
 
 .card:hover {
+  top: -10px;
   .card-img-overlay {
     opacity: 1;
   }

@@ -9,7 +9,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { uuidv4 } from '@core/helper';
 import { TrackImgService } from '@core/services/track-img/track-img.service';
 import {
@@ -62,8 +62,8 @@ export class MapTrackerComponent implements AfterViewInit {
 
   createPinForm() {
     return this.fb.group({
-      header: '',
-      text: '',
+      header: ['', Validators.required],
+      text: ['', Validators.required],
     });
   }
 
@@ -185,7 +185,7 @@ export class MapTrackerComponent implements AfterViewInit {
       let vm = this;
       setTimeout(() => {
         vm.hasSelected = true;
-      }, 200);
+      }, 10);
     }
   }
 
@@ -196,7 +196,7 @@ export class MapTrackerComponent implements AfterViewInit {
       vm.hasSelected = false;
       vm.currentId = null;
       vm.clickReceived = true;
-    }, 300);
+    }, 20);
   }
 
   @HostListener('mousemove', ['$event'])
