@@ -12,7 +12,7 @@
       class="col-12 col-sm-6 col-md-3 col-lg-2 mb-3 px-3"
       *ngFor="let map of maps; let i = index"
     >
-      <div class="card bg-white shadow rounded-lg my-2 h-100 position-relative">
+      <div class="card bg-white shadow rounded-lg my-2 h-100 position-relative" style="width: 18rem">
         <span
           *ngIf="map?.pins?.length"
           class="
@@ -30,7 +30,7 @@
         <div class="card-img img-fluid text-center">
           <img
             [src]="map.imageUrl"
-            class="py-2"
+            class="py-2 card-img-top"
             alt=""
             height="200"
             width="270"
@@ -49,7 +49,7 @@
             <small class="text-muted">
               Created: {{ map.createdDate | date: "medium" }}
             </small>
-            <small class="text-muted text-nowrap">
+            <small class="text-muted">
               Last updated: {{ map.modifiedDate | date: "medium" }}
             </small>
           </p>
