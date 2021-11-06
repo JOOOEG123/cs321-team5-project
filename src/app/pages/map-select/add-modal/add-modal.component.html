@@ -45,9 +45,9 @@
     <div class="col">
       <div class="form-floating mb-3" *ngFor="let formControl of formConst">
         <input
+          *ngIf="formControl.type === 'text'"
           type="text"
           class="form-control"
-          *ngIf="formControl.type === 'text'"
           [id]="formControl.formControl + '-regist'"
           [formControlName]="formControl.formControl"
           [placeholder]="formControl.placeholder"
@@ -58,8 +58,24 @@
           }"
           [attr.aria-describedby]="formControl.formControl + '-error'"
         />
+
+        <textarea
+          *ngIf="formControl.type === 'textarea'"
+          class="form-control h-100"
+          [id]="formControl.formControl + '-regist'"
+          [formControlName]="formControl.formControl"
+          [placeholder]="formControl.placeholder"
+          [ngClass]="{
+            'is-invalid':
+              addMapForm.controls[formControl.formControl].invalid &&
+              addMapForm.controls[formControl.formControl].touched
+          }"
+          [attr.aria-describedby]="formControl.formControl + '-error'"
+          aria-label="required"
+        ></textarea>
+
         <label
-          *ngIf="formControl.type === 'text'"
+          *ngIf="formControl.type === 'text' || formControl.type === 'textarea'"
           [for]="formControl.formControl + '-regist'"
         >
           {{ formControl.placeholder }}

@@ -23,7 +23,7 @@ export class AddModalComponent implements OnInit {
     {
       formControl: 'description',
       placeholder: 'Description',
-      type: 'text'
+      type: 'textarea'
     },
     {
       formControl: 'imageRef',
