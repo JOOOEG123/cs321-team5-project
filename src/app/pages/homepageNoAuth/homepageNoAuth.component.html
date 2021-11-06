@@ -9,7 +9,12 @@
       </div>
     </div>
     <div class= "containter-fluid">
-    <carousel>
+      <carousel [itemsPerSlide]="3"
+      [singleSlideOffset]="false"
+      [noWrap]="true"
+      [interval]="0"
+      [startFromIndex]="5"
+      >
       <slide>
         <img src="assets/images/homepage/maps.PNG" alt="first slide" style="display: block; width: 100%; ">
         <div class="carousel-caption d-none d-md-block">
