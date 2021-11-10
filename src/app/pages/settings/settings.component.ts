@@ -52,7 +52,7 @@ export class SettingsComponent implements OnInit, OnDestroy{
 
   async ngOnInit() {
     this.uid = (await this.auth.currentUser)?.uid;
-    if (this.uid !== undefined) {
+    if (this.uid != undefined) {
       this.document = this.dataStorage.getProfileDetails(this.uid);
       this.profileDetails = this.document.valueChanges(); //Gets the profile details struct.
 
