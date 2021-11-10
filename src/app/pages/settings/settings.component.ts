@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { UserProfile } from '@core/models/auth.model';
 import { DataStorageService } from '@core/services/data-storage/dataStorage.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import firebase from 'firebase/app';
 
 @Component({
@@ -11,7 +11,7 @@ import firebase from 'firebase/app';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy{
   //Holds the document that has the user profile settings.
   private document!: AngularFirestoreDocument<UserProfile>;
 
@@ -28,6 +28,9 @@ export class SettingsComponent implements OnInit {
   //Holds an observable of the user profile details.
   //Used to get a UserProfile struct with all the details that can be edited.
   profileDetails!: Observable<UserProfile | undefined>;
+
+  //Used to unsubscribe from the Observable.
+  private unsub: Subscription | undefined;
 
   //Interface object that will be used to hold the modified data.
   userProfile: UserProfile = {
@@ -55,11 +58,16 @@ export class SettingsComponent implements OnInit {
 
       //Subscribe to the component to get the data and store it locally in userProfile.
       //Saves the previous email address for later use.
-      this.profileDetails.subscribe((profile) => {
+      this.unsub = this.profileDetails.subscribe((profile) => {
         if (profile != undefined) this.userProfile = profile;
         if (profile?.email != null) this.prevEmail = profile.email;
       });
     }
+  }
+
+  //Unsubscribes when the page is closed.
+  ngOnDestroy() {
+    this.unsub?.unsubscribe();
   }
 
   //Runs updateProfileDetails with the new data after the user clicks submit.
