@@ -1,4 +1,3 @@
-
 import { SlicePipe } from '@angular/common';
 import {
   AfterViewInit,
@@ -39,7 +38,7 @@ export class MapTrackerComponent implements AfterViewInit {
   @Input() pinInformation: PinInformation = new PinInformation();
   @Output() pinInformationChange: EventEmitter<PinInformation> =
     new EventEmitter<PinInformation>();
-  @Input() pinType = ''
+  @Input() pinType = '';
   @ViewChild('imageel') imageel: any;
   @ViewChild('template') template: TemplateRef<any> | undefined;
   saveState: string = '';
@@ -55,8 +54,8 @@ export class MapTrackerComponent implements AfterViewInit {
     this.renderAll();
   }
 
-  renderAll(pinInformation?:PinInformation | undefined, render?:any) {
-    if(pinInformation) {
+  renderAll(pinInformation?: PinInformation | undefined, render?: any) {
+    if (pinInformation) {
       this.renderer = render;
       this.pinInformation = pinInformation;
     }
@@ -106,7 +105,9 @@ export class MapTrackerComponent implements AfterViewInit {
     if (nextPin.header) {
       let spanCaption = this.renderer.createElement('small');
       vm.renderer.setAttribute(spanCaption, 'class', 'popover-box');
-      const k = new SlicePipe().transform(nextPin.header, 0, 10)+(nextPin.header && nextPin.header.length >= 10 ? '...' : '') ;
+      const k =
+        new SlicePipe().transform(nextPin.header, 0, 10) +
+        (nextPin.header && nextPin.header.length >= 10 ? '...' : '');
       vm.renderer.setProperty(spanCaption, 'innerHTML', k);
       vm.renderer.appendChild(spanArea, spanCaption);
     }
@@ -124,7 +125,7 @@ export class MapTrackerComponent implements AfterViewInit {
     const findPin = this.pinInformation.pins.find(
       (item) => item.id === this.currentPinId
     );
-    if(findPin && (!findPin.header || !findPin.text)){
+    if (findPin && (!findPin.header || !findPin.text)) {
       this.removePin(this, findPin);
     }
     this.saveState = 'close';
@@ -133,7 +134,7 @@ export class MapTrackerComponent implements AfterViewInit {
 
   private stylePin(nextPin: Pin): string {
     let style: string =
-      `background-image: url(${nextPin.imgUrl || this.pinType});`  +
+      `background-image: url(${nextPin.imgUrl || this.pinType});` +
       'cursor:grab;position:absolute;top:' +
       nextPin.ycoords +
       'px;left:' +
@@ -192,7 +193,7 @@ export class MapTrackerComponent implements AfterViewInit {
       this.pinForm.patchValue(pin);
       this.modalService.open(this.template);
     }
-    if(this.saveState && !['close'].includes(this.saveState)) {
+    if (this.saveState && !['close'].includes(this.saveState)) {
       this.pinInformationChange.emit(this.pinInformation);
     }
   }
@@ -265,14 +266,18 @@ export class MapTrackerComponent implements AfterViewInit {
     let index = pins.findIndex((item: { id: any }) => item.id === current.id);
     let element: any = document.getElementById(current.id);
     pins[index].header = current.header;
-    const k = new SlicePipe().transform(current.header, 0, 10)+(current.header && current.header.length >= 10 ? '...' : '') ;
+    const k =
+      new SlicePipe().transform(current.header, 0, 10) +
+      (current.header && current.header.length >= 10 ? '...' : '');
     let popOverBox = element.getElementsByClassName('popover-box')[0];
     vm.renderer.setProperty(popOverBox, 'innerHTML', k);
     vm.pins.set(current.id, element);
     vm.hasSelected = false;
     vm.clickReceived = false;
     vm.currentId = '';
-    (current.header && current.text) && vm.pinInformationChange.emit(vm.pinInformation);
+    current.header &&
+      current.text &&
+      vm.pinInformationChange.emit(vm.pinInformation);
   }
 
   removePin(vm: MapTrackerComponent, current: Pin) {

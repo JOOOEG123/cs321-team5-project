@@ -25,7 +25,9 @@
             id="pin_desc"
             aria-label="required"
           />
-          <label for="pin_desc">Pin Header <span class="text-danger">*</span></label>
+          <label for="pin_desc"
+            >Pin Header <span class="text-danger">*</span></label
+          >
         </div>
       </div>
       <div class="col-12">
@@ -38,19 +40,33 @@
             id="pin_desc"
             aria-label="required"
           ></textarea>
-          <label for="pin_desc">Pin Description <span class="text-danger">*</span></label>
+          <label for="pin_desc"
+            >Pin Description <span class="text-danger">*</span></label
+          >
         </div>
       </div>
     </form>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" type="button" (click)="delete()" *ngIf="saveState == 'edit' || saveState == 'close'">
+    <button
+      class="btn btn-primary"
+      type="button"
+      (click)="delete()"
+      *ngIf="saveState == 'edit' || saveState == 'close'"
+    >
       Delete
     </button>
     <button class="btn btn-primary" type="button" (click)="onClosedModal()">
       Cancel
     </button>
-    <button class="btn btn-success" type="button" [disabled]="pinForm.invalid" (click)="save()">Save</button>
+    <button
+      class="btn btn-success"
+      type="button"
+      [disabled]="pinForm.invalid"
+      (click)="save()"
+    >
+      Save
+    </button>
   </div>
 </ng-template>

@@ -17,7 +17,9 @@
       <div class="row m-2">
         <div class="col-12 mb-5 position-relative">
           <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="h-6 text-danger my-2">To update the text click on the tooltip above the pin.</div>
+            <div class="h-6 text-danger my-2">
+              To update the text click on the tooltip above the pin.
+            </div>
             <div class="btn-group" role="group" aria-label="Image size button">
               <button
                 type="button"
@@ -48,12 +50,12 @@
             <div class="btn-group" role="group" aria-label="Image size button">
               <button
                 type="button"
-                [ngClass]="pin === pinType ?'border-success':''"
+                [ngClass]="pin === pinType ? 'border-success' : ''"
                 class="btn shadow"
                 *ngFor="let pin of allPins"
                 (click)="pinType = pin"
               >
-                <img [src]="pin" height="30"/>
+                <img [src]="pin" height="30" />
               </button>
             </div>
           </div>
