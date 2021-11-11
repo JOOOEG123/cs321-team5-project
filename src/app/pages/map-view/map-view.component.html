@@ -17,6 +17,7 @@
       <div class="row m-2">
         <div class="col-12 mb-5 position-relative">
           <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="h-6 text-danger my-2">To update the text click on the tooltip above the pin.</div>
             <div class="btn-group" role="group" aria-label="Image size button">
               <button
                 type="button"
@@ -38,6 +39,21 @@
                 (click)="onChangeImageSize('large')"
               >
                 Large Size
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 my-5 position-relative">
+          <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="btn-group" role="group" aria-label="Image size button">
+              <button
+                type="button"
+                [ngClass]="pin === pinType ?'border-success':''"
+                class="btn shadow"
+                *ngFor="let pin of allPins"
+                (click)="pinType = pin"
+              >
+                <img [src]="pin" height="30"/>
               </button>
             </div>
           </div>
@@ -94,6 +110,7 @@
       class="col-auto border rounded-lg m-0 p-0"
       *ngIf="pindata"
       [pinInformation]="pindata"
+      [pinType]="pinType"
       (pinInformationChange)="onChanges($event)"
       #imagePin
     ></app-map-tracker>

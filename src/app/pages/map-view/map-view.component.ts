@@ -26,6 +26,13 @@ export class MapViewComponent implements OnInit, OnDestroy {
   pindata!: PinInformation;
   index!: number;
   imgUrl: any;
+  pinType = './assets/images/dashboard/red-pin.png';
+  allPins = [
+    './assets/images/dashboard/marker.png',
+    './assets/images/dashboard/red-pin.png',
+    './assets/images/dashboard/pin.png',
+    './assets/images/dashboard/pins.png'
+  ]
 
   @ViewChild('imagePin') imagePin!: MapTrackerComponent;
 
@@ -72,6 +79,13 @@ export class MapViewComponent implements OnInit, OnDestroy {
         this.pindata.imageYSize = 974;
         break;
     }
+    // this.pindata.pins.map(x=>{
+    //   const { xcoords, ycoords} = x;
+    //   x.xcoords = (this.pindata.imageXSize/this.map.resolX) * xcoords;
+    //   x.ycoords = (this.pindata.imageYSize/this.map.resolY) * ycoords;
+    //   return x;
+    // })
+    console.log(this.pindata)
     this.imagePin.renderAll(this.pindata, this.renderer);
     this.onChanges(this.pindata);
   }
@@ -81,8 +95,10 @@ export class MapViewComponent implements OnInit, OnDestroy {
     this.map.pins = event.pins;
     this.map.resolX = event.imageXSize;
     this.map.resolY = event.imageYSize;
+
     this.mapService.updateUserMap(this.map, this.index).finally(() => {
       this.spinner.hide();
     });
+
   }
 }

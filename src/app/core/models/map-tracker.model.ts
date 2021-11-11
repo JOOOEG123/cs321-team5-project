@@ -11,6 +11,7 @@ export class Pin {
   ycoords: number = 0;
   id!: string;
   direction: Direction = 0;
+  imgUrl:string = '';
   size: Size = 0;
 }
 

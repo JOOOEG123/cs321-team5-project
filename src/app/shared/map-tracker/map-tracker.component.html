@@ -45,7 +45,7 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary" type="button" (click)="delete()">
+    <button class="btn btn-primary" type="button" (click)="delete()" *ngIf="saveState == 'edit' || saveState == 'close'">
       Delete
     </button>
     <button class="btn btn-primary" type="button" (click)="onClosedModal()">
