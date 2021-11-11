@@ -9,24 +9,19 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
 
-  <div class="list-group-flush px-0">
-    <a class="list-group-item list-group-item-action bg-dark ps-3"
-     type="button" data-bs-dismiss="offcanvas" (click)="signOut()" *ngIf="isLogin">Sign Out
-  </a>
-  </div>
-
   <hr>
 
   <div class="offcanvas-body">
 
-    <!--Search Bar-->
+    <!--Search Bar
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search page" aria-label="Search">
       <button class="btn btn-outline-info my-2 my-sm-1 btn-sm" type="submit">Search</button>
     </form>
+    -->
 
     <!--Tab list w/ links to each window-->
-    <div class="list-group-flush pt-2">
+    <div class="list-group-flush">
       <a [routerLink]="['map-select']" class="list-group-item list-group-item-action bg-dark"
        type="button" data-bs-dismiss="offcanvas">My Maps
       </a>
@@ -35,6 +30,9 @@
       </a>
       <a [routerLink]="['settings', uid]" class="list-group-item list-group-item-action bg-dark"
        type="button" data-bs-dismiss="offcanvas">Account Settings
+      </a>
+      <a class="list-group-item list-group-item-action bg-dark ps-3"
+        type="button" data-bs-dismiss="offcanvas" (click)="signOut()" *ngIf="isLogin">Sign Out
       </a>
     </div>
   </div>
