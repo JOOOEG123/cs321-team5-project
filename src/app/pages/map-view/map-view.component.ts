@@ -85,12 +85,11 @@ export class MapViewComponent implements OnInit, OnDestroy {
       x.ycoords = (this.pindata.imageYSize/this.map.resolY) * ycoords;
       return x;
     })
-    console.log(this.pindata)
-    this.imagePin.renderAll(this.pindata, this.renderer);
-    this.onChanges(this.pindata);
+    // this.imagePin.renderAll(this.pindata, this.renderer);
+    this.onChanges(this.pindata, true);
   }
 
-  onChanges(event: PinInformation) {
+  onChanges(event: PinInformation, refresh = false) {
     this.spinner.show();
     this.map.pins = event.pins;
     this.map.resolX = event.imageXSize;
@@ -98,7 +97,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
     this.mapService.updateUserMap(this.map, this.index).finally(() => {
       this.spinner.hide();
-      location.reload();
+      refresh && location.reload();
     });
 
   }

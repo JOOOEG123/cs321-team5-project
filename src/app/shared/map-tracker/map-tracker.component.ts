@@ -192,7 +192,6 @@ export class MapTrackerComponent implements AfterViewInit {
       this.pinForm.patchValue(pin);
       this.modalService.open(this.template);
     }
-    console.log("H-", this.saveState)
     if(this.saveState && !['close'].includes(this.saveState)) {
       this.pinInformationChange.emit(this.pinInformation);
     }
