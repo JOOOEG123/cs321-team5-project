@@ -79,12 +79,12 @@ export class MapViewComponent implements OnInit, OnDestroy {
         this.pindata.imageYSize = 974;
         break;
     }
-    // this.pindata.pins.map(x=>{
-    //   const { xcoords, ycoords} = x;
-    //   x.xcoords = (this.pindata.imageXSize/this.map.resolX) * xcoords;
-    //   x.ycoords = (this.pindata.imageYSize/this.map.resolY) * ycoords;
-    //   return x;
-    // })
+    this.pindata.pins.map(x=>{
+      const { xcoords, ycoords} = x;
+      x.xcoords = (this.pindata.imageXSize/this.map.resolX) * xcoords;
+      x.ycoords = (this.pindata.imageYSize/this.map.resolY) * ycoords;
+      return x;
+    })
     console.log(this.pindata)
     this.imagePin.renderAll(this.pindata, this.renderer);
     this.onChanges(this.pindata);
@@ -98,6 +98,7 @@ export class MapViewComponent implements OnInit, OnDestroy {
 
     this.mapService.updateUserMap(this.map, this.index).finally(() => {
       this.spinner.hide();
+      location.reload();
     });
 
   }
