@@ -1,22 +1,52 @@
 <!-- Created by Renato Scudere. -->
 
 <div class="container-fluid">
-  <h2 class="text-center">About Us</h2>
-  <p>
-    We are a team of four Computer Science students at George Mason University,
-    and this is our application for our Software Engineering Course (CS321).
-    This application is the brainchild of Seth Harding for our Software
-    Engineering course, which we were tasked to build as a team. Being a dungeon
-    master, he wanted an application which could be used to simplify the role of
-    notekeeping for a campaign. Working together as a team, we were able to
-    create an application for location-based notekeeping we could call our own.
-  </p>
-  <h3>Team Members</h3>
-  <ul>
-    <li>Joel Adeniji.</li>
-    <li>Seth Harding.</li>
-    <li>Renato Scudere.</li>
-    <li>Thomas Clarke.</li>
+
+  <ul class="nav nav-tabs" id="infoTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="about-us-tab" data-bs-toggle="tab" data-bs-target="#about-us"
+      type="button" role="tab" aria-controls="about-us" aria-selected="true">About Us</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq"
+      type="button" role="tab" aria-controls="faq" aria-selected="false">FAQ</button>
+    </li>
   </ul>
-  <p>We hope you find our application useful and enjoyable.</p>
+
+  <div class="tab-content" id="infoTabContents">
+
+    <!--About Us Section-->
+    <div class="tab-pane fade show active" id="about-us" role="tabpanel" aria-labelledby="about-us-tab">
+      <h2 class="text-center">About Us</h2>
+        <p>
+          We are a team of four Computer Science students at George Mason University,
+          and this is our application for our Software Engineering Course (CS321).
+          This application is the brainchild of Seth Harding for our Software
+          Engineering course, which we were tasked to build as a team. Being a dungeon
+          master, he wanted an application which could be used to simplify the role of
+          notekeeping for a campaign. Working together as a team, we were able to
+          create an application for location-based notekeeping we could call our own.
+        </p>
+        <h3>Team Members</h3>
+        <ul>
+          <li>Joel Adeniji.</li>
+          <li>Seth Harding.</li>
+          <li>Renato Scudere.</li>
+          <li>Thomas Clarke.</li>
+        </ul>
+        <p>We hope you find our application useful and enjoyable.</p>
+    </div>
+
+    <!--FAQ Section, Made by Seth-->
+    <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+      <h6>FAQ</h6>
+      <p><b>What does this cost?</b> Nothing it is absolutely free.</p>
+      <p><b>Can I use this from games other than DND?</b>
+        Of course, this is designed to be system agnostic so any tabletop game can work.</p>
+      <p><b>Can I use this to organize offical Modules?</b>
+        Yes but only for modules you already own.</p>
+    </div>
+
+  </div>
+
 </div>
