@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 import { UserProfileComponent } from './user-profile.component';
 
@@ -8,6 +11,11 @@ describe('UserProfileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[HttpClientModule,  AngularFireModule.initializeApp(environment.firebase)],
+      providers: [
+        AngularFireModule,
+        HttpClientModule
+      ],
       declarations: [ UserProfileComponent ]
     })
     .compileComponents();

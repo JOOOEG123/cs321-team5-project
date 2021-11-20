@@ -12,6 +12,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     AlertModule.forRoot(),
     CarouselModule.forRoot(),
   ],
+  providers: [],
   exports: [CommonModule, ModalModule, AlertModule, CarouselModule],
 })
 export class NgxBootstrapModule {}
