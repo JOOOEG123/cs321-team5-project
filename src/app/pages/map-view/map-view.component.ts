@@ -34,6 +34,8 @@ export class MapViewComponent implements OnInit, OnDestroy {
     './assets/images/dashboard/pins.png',
   ];
 
+  editMode = true;
+
   @ViewChild('imagePin') imagePin!: MapTrackerComponent;
 
   constructor(
@@ -99,5 +101,9 @@ export class MapViewComponent implements OnInit, OnDestroy {
       this.spinner.hide();
       refresh && location.reload();
     });
+  }
+
+  editViewSwitch() {
+    this.editMode = !this.editMode;
   }
 }

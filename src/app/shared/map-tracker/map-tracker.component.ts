@@ -39,10 +39,12 @@ export class MapTrackerComponent implements AfterViewInit {
   @Output() pinInformationChange: EventEmitter<PinInformation> =
     new EventEmitter<PinInformation>();
   @Input() pinType = '';
+  @Input() editMode = true;
   @ViewChild('imageel') imageel: any;
   @ViewChild('template') template: TemplateRef<any> | undefined;
   saveState: string = '';
   currentPinId: string = '';
+  currentPin: Pin | undefined;
 
   constructor(
     private modalService: TrackImgService,
@@ -161,6 +163,19 @@ export class MapTrackerComponent implements AfterViewInit {
       targetElement = targetElement.parentNode;
     }
     let id: string = targetElement.id;
+
+    // deal with the offcanvas showing and closing click as well
+    if(id === 'showOffCanvas' || id === 'offCanvasClose') { return; }
+    // view mode
+    if(!this.editMode && this.pins.has(id) && !this.hasSelected) {
+      this.clickReceived = true;
+      this.currentPin = this.pinInformation.pins.find(
+        (item) => item.id === id
+      );
+      let offcanvas = document.getElementById('showOffCanvas');
+      offcanvas?.click();
+      return;
+    }
 
     if (!this.template) return;
     if (this.pins.has(id) && !this.hasSelected) {

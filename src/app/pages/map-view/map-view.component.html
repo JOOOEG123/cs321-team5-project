@@ -12,6 +12,8 @@
   <div class="card w-100">
     <div class="card-header bg-transparent">
       <h5 class="card-title">{{ map.name }}</h5>
+      <button *ngIf='editMode' type="button" class="btn btn-primary" (click)='editViewSwitch()'>Edit Mode</button>
+      <button *ngIf='!editMode' type="button" class="btn btn-primary" (click)='editViewSwitch()'>View Mode</button>
     </div>
     <div class="card-body">
       <div class="row m-2">
@@ -113,6 +115,7 @@
       *ngIf="pindata"
       [pinInformation]="pindata"
       [pinType]="pinType"
+      [editMode]='editMode'
       (pinInformationChange)="onChanges($event)"
       #imagePin
     ></app-map-tracker>
